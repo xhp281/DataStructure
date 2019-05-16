@@ -29,6 +29,13 @@ public class Deque<E> {
     }
 
     /**
+     * 清空队列
+     */
+    public void  clear(){
+        list.clear();
+    }
+
+    /**
      * 尾部入队
      * @param element
      */

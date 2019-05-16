@@ -89,7 +89,7 @@ public class Main {
         queue.enQueueFront(11);
         queue.enQueueFront(12);
 
-        System.out.println(queue.toString()); // [300 200 100 1 2 3]
+        System.out.println(queue.toString());
         System.out.println("第一个元素：" + queue.front());
     }
     public static void main(String[] args){

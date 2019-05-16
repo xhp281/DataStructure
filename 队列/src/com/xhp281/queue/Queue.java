@@ -29,6 +29,13 @@ public class Queue<E>{
     }
 
     /**
+     * 清空队列
+     */
+    public void  clear(){
+        list.clear();
+    }
+
+    /**
      * 进队
      * @param element
      */

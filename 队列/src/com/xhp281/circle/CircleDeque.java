@@ -36,6 +36,17 @@ public class CircleDeque<E> {
     }
 
     /**
+     * 清空队列
+     */
+    public void  clear(){
+        for (int i = 0; i < size; i++) {
+            elements[index(i)] = null;
+        }
+        front = 0;
+        size  = 0;
+    }
+
+    /**
      * 头部入队
      * @param element
      */
