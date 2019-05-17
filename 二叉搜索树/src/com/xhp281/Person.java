@@ -13,6 +13,10 @@ public class Person implements Comparable<Person> {
         this.age = age;
     }
 
+    public int getAge() {
+        return age;
+    }
+
     @Override
     public int compareTo(Person e) {
 //        if (age > e.age) return 1;

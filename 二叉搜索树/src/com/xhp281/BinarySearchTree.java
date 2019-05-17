@@ -6,9 +6,14 @@ package com.xhp281;
  * Description: 二叉搜索树
  */
 
-public class BinarySearchTree<E extends Comparable> {
+public class BinarySearchTree<E> {
     public int size;
     Node<E> root;
+    public Comparator<E> comparator;
+
+    public BinarySearchTree(Comparator<E> comparator) {
+        this.comparator = comparator;
+    }
 
     // 节点对象
     public static class Node<E>{
@@ -126,7 +131,7 @@ public class BinarySearchTree<E extends Comparable> {
      * @return 返回值等于0：e1 = e2 返回值大于0：e1 > e2 返回值小于0: e1 < e2
      */
     private int compare(E e1,E e2){
-        return  e1.compareTo(e2);
+        return  comparator.compare(e1, e2);
     }
 
 }
