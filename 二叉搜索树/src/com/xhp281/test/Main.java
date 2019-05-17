@@ -18,7 +18,7 @@ public class Main {
 //        for (int i = 0; i < data.length; i++) {
 //            bst.add(data[i]);
 //        }
-        BinarySearchTree<Person> bst2 = BinarySearchTree<>();
+        BinarySearchTree<Person> bst2 = new BinarySearchTree<>();
         bst2.add(new Person(1));
         bst2.add(new Person(2));
 
