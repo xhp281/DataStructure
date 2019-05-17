@@ -1,18 +1,52 @@
 package com.xhp281;
 
+import com.xhp281.printer.BinaryTreeInfo;
+
+import java.util.Comparator;
+
 /**
  * User: FenDou
  * Date: 2019-05-17 13:53
  * Description: 二叉搜索树
  */
 
-public class BinarySearchTree<E> {
-    public int size;
-    Node<E> root;
-    public Comparator<E> comparator;
+public class BinarySearchTree<E> implements BinaryTreeInfo {
+    private int size;
+    private Node<E> root;
+    private Comparator<E> comparator;
 
+    /**
+     * 初始化方式
+     */
+    public BinarySearchTree(){
+        this(null);
+    }
     public BinarySearchTree(Comparator<E> comparator) {
         this.comparator = comparator;
+    }
+
+    /**
+     * 二叉树打印接口设置
+     * @return
+     */
+    @Override
+    public Object root() {
+        return root;
+    }
+
+    @Override
+    public Object left(Object node) {
+        return ((Node<E>)node).leftNode;
+    }
+
+    @Override
+    public Object right(Object node) {
+        return ((Node<E>)node).rightNode;
+    }
+
+    @Override
+    public Object string(Object node) {
+        return ((Node<E>)node).element;
     }
 
     // 节点对象
@@ -24,7 +58,7 @@ public class BinarySearchTree<E> {
 
         public Node(E element, Node<E> parent) {
             this.element = element;
-            this.parent = parent;
+            this.parent  = parent;
         }
     }
 
@@ -70,7 +104,7 @@ public class BinarySearchTree<E> {
         Node<E> node = root;
         // 比较结果
         int cmp = 0;
-        if (node != null){
+        while (node != null){
             // 比较大小
             cmp = compare(element,node.element);
             // 获取父节点
@@ -79,7 +113,7 @@ public class BinarySearchTree<E> {
             if (cmp > 0){
                 node = node.rightNode;
                 // 新元素< 父节点：去左边查找
-            }if (cmp < 0){
+            }else if (cmp < 0){
                 node = node.leftNode;
             }else{
                 // 相等直接返回
@@ -89,7 +123,7 @@ public class BinarySearchTree<E> {
         // 判断是设置为左子树还是右子树
         // 获取新节点
         Node<E> newNode = new Node<>(element,parent);
-        if (cmp < 0){ // 右
+        if (cmp > 0){ // 右
             parent.rightNode = newNode;
         }else{
             parent.leftNode  = newNode;
@@ -131,7 +165,11 @@ public class BinarySearchTree<E> {
      * @return 返回值等于0：e1 = e2 返回值大于0：e1 > e2 返回值小于0: e1 < e2
      */
     private int compare(E e1,E e2){
-        return  comparator.compare(e1, e2);
+        // 有判断条件的时候使用判断条件
+        if (comparator != null){
+            return  comparator.compare(e1, e2);
+        }
+        return ((Comparable<E>)e1).compareTo(e2);
     }
 
 }
