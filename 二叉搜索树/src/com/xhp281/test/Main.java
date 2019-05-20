@@ -153,7 +153,7 @@ public class Main {// 创建比较器
      */
     static void toStringTest(){
         Integer data[] = new Integer[] {
-                7,4,2,1,3,5,9,8,11,10,12
+                7,4,2,1,3,5,9,8,11,10,12,
         };
         BinarySearchTree<Integer> bst = new BinarySearchTree<>();
         for (int i = 0; i < data.length; i++) {
@@ -162,7 +162,10 @@ public class Main {// 创建比较器
 
         BinaryTrees.println(bst);
         System.out.println(bst);
+        System.out.println("高度: " + bst.height());
+
     }
+
 
     /**
      * 主函数
