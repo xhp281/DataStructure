@@ -1,6 +1,8 @@
 package com.xhp281;
 import com.xhp281.printer.BinaryTreeInfo;
 import java.util.Comparator;
+import java.util.LinkedList;
+import java.util.Queue;
 
 /**
  * User: FenDou
@@ -21,36 +23,6 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
     }
     public BinarySearchTree(Comparator<E> comparator) {
         this.comparator = comparator;
-    }
-
-    /**
-     * 二叉树打印接口设置
-     * @return
-     */
-    @Override
-    public Object root() {
-        return root;
-    }
-
-    @Override
-    public Object left(Object node) {
-        return ((Node<E>)node).leftNode;
-    }
-
-    @Override
-    public Object right(Object node) {
-        return ((Node<E>)node).rightNode;
-    }
-
-    @Override
-    public Object string(Object node) {
-        // 获取父节点内容
-        Node<E> currNode =  (Node<E>)node;
-        String parentString = "null";
-        if (currNode.parent != null){
-            parentString = currNode.parent.element.toString();
-        }
-        return currNode.element + "(" + parentString + ")";
     }
 
     // 节点对象
@@ -177,4 +149,180 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         return ((Comparable<E>)e1).compareTo(e2);
     }
 
+// ================================= 二叉树打印接口设置
+    @Override
+    public Object root() {
+        return root;
+    }
+
+    @Override
+    public Object left(Object node) {
+        return ((Node<E>)node).leftNode;
+    }
+
+    @Override
+    public Object right(Object node) {
+        return ((Node<E>)node).rightNode;
+    }
+
+    @Override
+    public Object string(Object node) {
+        // 获取父节点内容
+        Node<E> currNode =  (Node<E>)node;
+        String parentString = "null";
+        if (currNode.parent != null){
+            parentString = currNode.parent.element.toString();
+        }
+        return currNode.element + "(" + parentString + ")";
+    }
+
+//======================================= 遍历
+
+    /**
+     * 前序遍历
+     */
+    public void preorderTraversal(){
+        preorderTraversal(root);
+    }
+
+    public void preorderTraversal(Node<E> node){
+        if (node == null) return;
+
+        System.out.print("_" + node.element + "_ ");
+        preorderTraversal(node.leftNode);
+        preorderTraversal(node.rightNode);
+    }
+
+    /**
+     * 中序遍历
+     * 二叉搜索树的遍历结果是可以控制升序还是降序
+     * 升序：中序遍历左子树、根节点、中序遍历右子树
+     * 降序：中序遍历右子树、根节点、中序遍历左子树
+     */
+    public void inorderTraversal(){
+        inorderTraversal(root);
+    }
+
+    public void inorderTraversal(Node<E> node){
+        if (node == null) return;
+
+        inorderTraversal(node.leftNode);
+        System.out.print("_" + node.element + "_ ");
+        inorderTraversal(node.rightNode);
+    }
+    /**
+     * 后续遍历遍历
+     */
+    public void postorderTraversal(){
+        postorderTraversal(root);
+    }
+
+    public void postorderTraversal(Node<E> node){
+        if (node == null) return;
+
+        postorderTraversal(node.leftNode);
+        postorderTraversal(node.rightNode);
+        System.out.print("_" + node.element + "_ ");
+    }
+
+    /**
+     * 层序遍历
+     */
+    public void levelOrderTraversal(){
+        if (root == null) return;
+
+        Queue<Node<E>> queue = new LinkedList<>();
+        queue.offer(root);
+
+        while (!queue.isEmpty()){
+            Node<E> node = queue.poll();
+            System.out.println(node.element);
+
+            if (node.leftNode != null){
+                queue.offer(node.leftNode);
+            }
+            if (node.rightNode != null){
+                queue.offer(node.rightNode);
+            }
+        }
+    }
+
+//======================================= 使用访问器接口进行遍历
+
+    /**
+     * 访问器接口
+     * @param <E>
+     */
+    public static interface Visitor<E>{
+        void visit(E element);
+    }
+
+    /**
+     * 层序遍历
+     * @param visitor
+     */
+    public void levelOrder(Visitor<E> visitor){
+        if (root == null|| visitor == null) return;
+
+        Queue<Node<E>> queue = new LinkedList<>();
+        queue.offer(root);
+
+        while (!queue.isEmpty()){
+            Node<E> node = queue.poll();
+            visitor.visit(node.element);
+            if (node.leftNode != null){
+                queue.offer(node.leftNode);
+            }
+            if (node.rightNode != null){
+                queue.offer(node.rightNode);
+            }
+        }
+    }
+    /**
+     * 后续遍历遍历
+     */
+    public void postorderOrder(Visitor<E> visitor){
+        postorderOrder(root,visitor);
+    }
+
+    public void postorderOrder(Node<E> node,Visitor<E> visitor){
+        if (node == null || visitor == null) return;
+
+        postorderOrder(node.leftNode,visitor);
+        postorderOrder(node.rightNode,visitor);
+        visitor.visit(node.element);
+    }
+
+    /**
+     * 中序遍历
+     * 二叉搜索树的遍历结果是可以控制升序还是降序
+     * 升序：中序遍历左子树、根节点、中序遍历右子树
+     * 降序：中序遍历右子树、根节点、中序遍历左子树
+     */
+    public void inorderOrder(Visitor<E> visitor){
+        inorderOrder(root,visitor);
+    }
+
+    public void inorderOrder(Node<E> node,Visitor<E> visitor){
+        if (node == null || visitor == null) return;
+
+        inorderOrder(node.leftNode,visitor);
+        visitor.visit(node.element);
+        inorderOrder(node.rightNode,visitor);
+    }
+
+    /**
+     * 前序遍历
+     */
+    public void preorderOrder(Visitor<E> visitor){
+        preorderOrder(root,visitor);
+    }
+
+    public void preorderOrder(Node<E> node,Visitor<E> visitor){
+        if (node == null || visitor == null) return;
+
+        visitor.visit(node.element);
+        preorderOrder(node.leftNode,visitor);
+        preorderOrder(node.rightNode,visitor);
+    }
 }

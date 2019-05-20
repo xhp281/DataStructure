@@ -111,6 +111,45 @@ public class Main {// 创建比较器
     }
 
     /**
+     * 前序遍历测试
+     */
+    static void preorderTraversalTest(){
+        Integer data[] = new Integer[] {
+                7,4,2,1,3,5,9,8,11,10,12
+        };
+        BinarySearchTree<Integer> bst = new BinarySearchTree<>();
+        for (int i = 0; i < data.length; i++) {
+            bst.add(data[i]);
+        }
+        BinaryTrees.println(bst);
+        bst.preorderTraversal();   // 前序遍历
+        bst.preorderOrder(new BinarySearchTree.Visitor<Integer>() {
+            public void visit(Integer element) {
+              System.out.print("_" + element + "_ ");
+            }
+        });
+//        bst.inorderTraversal();    // 中序遍历
+//        bst.inorderOrder(new BinarySearchTree.Visitor<Integer>() {
+//            public void visit(Integer element) {
+//              System.out.print("_" + element + "_ ");
+//            }
+//        });
+//        bst.postorderTraversal();  // 后续遍历
+//        bst.postorderOrder(new BinarySearchTree.Visitor<Integer>() {
+//           public void visit(Integer element) {
+//             System.out.print("_" + element + "_ ");
+//           }
+//        });
+//        bst.levelOrderTraversal(); // 层序遍历
+//        bst.levelOrder(new BinarySearchTree.Visitor<Integer>() {
+//            public void visit(Integer element) {
+//               System.out.print("_" + element + "_ ");
+//            }
+//        });
+
+    }
+
+    /**
      * 主函数
      * @param args
      */
@@ -119,8 +158,8 @@ public class Main {// 创建比较器
 //        test2();
 //        test3();
 //        test4();
-        test5();
-
+//        test5();
+        preorderTraversalTest();
     }
 
 }
