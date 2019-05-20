@@ -36,6 +36,22 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
             this.element = element;
             this.parent  = parent;
         }
+
+        /**
+         * 是不是叶子节点
+         * @return
+         */
+        public boolean isLeaf(){
+            return leftNode == null && rightNode == null;
+        }
+
+        /**
+         * 拥有两个节点
+         * @return
+         */
+        public boolean hasTwoChildren(){
+            return leftNode != null && rightNode != null;
+        }
     }
 
     /**
@@ -147,6 +163,35 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
             return  comparator.compare(e1, e2);
         }
         return ((Comparable<E>)e1).compareTo(e2);
+    }
+
+    /**
+     * 判断是不是二叉树
+     * @return
+     */
+    public Boolean isComplete(){
+        if (root == null) return false;
+        Queue<Node<E>> queue = new LinkedList<>();
+        queue.offer(root);
+
+        // 是不是叶子节点
+        boolean leaf = false;
+        while (!queue.isEmpty()){
+            Node<E> node = queue.poll();
+            // 如果不是叶子节点返回false
+            if (leaf && !node.isLeaf()) return false;
+
+            if (node.hasTwoChildren()){
+                queue.offer(node.leftNode);
+                queue.offer(node.rightNode);
+            }else if (node.leftNode == null && node.rightNode != null){
+                return false;
+            }else{
+                // 到此处的时候是叶子节点
+                leaf = true;
+            }
+        }
+        return  true;
     }
 
 // ================================= 二叉树打印接口设置
