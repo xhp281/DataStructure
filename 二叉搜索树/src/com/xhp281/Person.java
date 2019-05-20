@@ -8,9 +8,15 @@ package com.xhp281;
 
 public class Person implements Comparable<Person> {
     public int age;
+    public String name;
 
     public Person(int age) {
         this.age = age;
+    }
+
+    public Person(int age, String name) {
+        this.age = age;
+        this.name = name;
     }
 
     public int getAge() {
@@ -27,6 +33,6 @@ public class Person implements Comparable<Person> {
 
     @Override
     public String toString() {
-        return "age:" + age;
+        return "" + age + "-" + name;
     }
 }

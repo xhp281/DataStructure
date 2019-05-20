@@ -1,7 +1,5 @@
 package com.xhp281;
-
 import com.xhp281.printer.BinaryTreeInfo;
-
 import java.util.Comparator;
 
 /**
@@ -46,7 +44,13 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
 
     @Override
     public Object string(Object node) {
-        return ((Node<E>)node).element;
+        // 获取父节点内容
+        Node<E> currNode =  (Node<E>)node;
+        String parentString = "null";
+        if (currNode.parent != null){
+            parentString = currNode.parent.element.toString();
+        }
+        return currNode.element + "(" + parentString + ")";
     }
 
     // 节点对象
@@ -117,6 +121,7 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
                 node = node.leftNode;
             }else{
                 // 相等直接返回
+                node.element = element;
                 return;
             }
         }

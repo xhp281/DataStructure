@@ -1,18 +1,18 @@
 package com.xhp281.test;
-import com.xhp281.BinarySearchTree;
 import com.xhp281.Person;
+import java.util.Comparator;
+import com.xhp281.BinarySearchTree;
+import com.xhp281.file.Files;
 import com.xhp281.printer.BinaryTrees;
 
-import java.util.Comparator;
 
 /**
  * User: FenDou
- * Date: 2019-05-17 18:15
+ * Date: 2019-05-20 10:58
  * Description:
  */
 
-public class Main {
-    // 创建比较器
+public class Main {// 创建比较器
     private static class PersonComparator implements Comparator<Person> {
         @Override
         public int compare(Person e1, Person e2) {
@@ -58,19 +58,32 @@ public class Main {
         BinarySearchTree<Person> bst = new BinarySearchTree<>(new Comparator<Person>() {
             @Override
             public int compare(Person e1, Person e2) {
-                return e1.getAge() - e2.getAge();
+                return e2.getAge() - e1.getAge();
             }
         });
         for (int i = 0; i < data.length; i++) {
             bst.add(new Person(data[i]));
         }
-        BinaryTrees.println(bst);
+       BinaryTrees.println(bst);
     }
 
     /**
+     * 默认函数方式比较
+     */
+    static void test3(){
+        Integer data[] = new Integer[] {
+                7, 4, 9, 2, 5, 8, 11, 3, 12, 1
+        };
+        BinarySearchTree<Person> bst = new BinarySearchTree<>();
+        for (int i = 0; i < data.length; i++) {
+            bst.add(new Person(data[i]));
+        }
+        BinaryTrees.println(bst);
+    }
+    /**
      * 打印数字
      */
-    static void test3() {
+    static void test4() {
         Integer data[] = new Integer[] {
                 7, 4, 9, 2, 5, 8, 11, 3, 12, 1
         };
@@ -79,6 +92,20 @@ public class Main {
         for (int i = 0; i < 30; i++) {
             bst.add((int)(Math.random() * 100));
         }
+        BinaryTrees.println(bst);
+        // 写入文件操作
+//        String str = BinaryTrees.printString(bst);
+//        Files.writeToFile("/Users/FenDou/Desktop/fileTest/1.txt",str);
+    }
+    /**
+     * 覆盖方式测试
+     */
+    static void test5(){
+        BinarySearchTree<Person> bst = new BinarySearchTree<>();
+        bst.add(new Person(10, "p1"));
+        bst.add(new Person(9, "p2"));
+        bst.add(new Person(30, "p3"));
+        bst.add(new Person(30, "p4"));
 
         BinaryTrees.println(bst);
     }
@@ -90,7 +117,10 @@ public class Main {
     public static void main(String[] args) {
 //        test1();
 //        test2();
-        test3();
- }
+//        test3();
+//        test4();
+        test5();
+
+    }
 
 }
