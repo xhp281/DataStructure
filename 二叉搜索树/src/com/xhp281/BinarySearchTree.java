@@ -185,7 +185,7 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         preorderTraversal(root);
     }
 
-    public void preorderTraversal(Node<E> node){
+    private void preorderTraversal(Node<E> node){
         if (node == null) return;
 
         System.out.print("_" + node.element + "_ ");
@@ -203,7 +203,7 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         inorderTraversal(root);
     }
 
-    public void inorderTraversal(Node<E> node){
+    private void inorderTraversal(Node<E> node){
         if (node == null) return;
 
         inorderTraversal(node.leftNode);
@@ -217,7 +217,7 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         postorderTraversal(root);
     }
 
-    public void postorderTraversal(Node<E> node){
+    private void postorderTraversal(Node<E> node){
         if (node == null) return;
 
         postorderTraversal(node.leftNode);
@@ -285,7 +285,7 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         postorderOrder(root,visitor);
     }
 
-    public void postorderOrder(Node<E> node,Visitor<E> visitor){
+    private void postorderOrder(Node<E> node,Visitor<E> visitor){
         if (node == null || visitor == null) return;
 
         postorderOrder(node.leftNode,visitor);
@@ -303,7 +303,7 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         inorderOrder(root,visitor);
     }
 
-    public void inorderOrder(Node<E> node,Visitor<E> visitor){
+    private void inorderOrder(Node<E> node,Visitor<E> visitor){
         if (node == null || visitor == null) return;
 
         inorderOrder(node.leftNode,visitor);
@@ -318,11 +318,26 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         preorderOrder(root,visitor);
     }
 
-    public void preorderOrder(Node<E> node,Visitor<E> visitor){
+    private void preorderOrder(Node<E> node,Visitor<E> visitor){
         if (node == null || visitor == null) return;
 
         visitor.visit(node.element);
         preorderOrder(node.leftNode,visitor);
         preorderOrder(node.rightNode,visitor);
+    }
+
+    // ================================== 打印方法
+
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        toString(root,sb,"");
+        return sb.toString();
+    }
+    private void toString(Node<E> node,StringBuilder sb,String prefix){
+        if (node == null) return;
+        sb.append(prefix).append(node.element).append("\n");
+        toString(node.leftNode,sb,prefix + "L --> ");
+        toString(node.rightNode,sb,prefix + "R --> ");
     }
 }

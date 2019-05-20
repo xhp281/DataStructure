@@ -111,9 +111,9 @@ public class Main {// 创建比较器
     }
 
     /**
-     * 前序遍历测试
+     * 遍历测试
      */
-    static void preorderTraversalTest(){
+    static void traversalTest(){
         Integer data[] = new Integer[] {
                 7,4,2,1,3,5,9,8,11,10,12
         };
@@ -146,7 +146,22 @@ public class Main {// 创建比较器
 //               System.out.print("_" + element + "_ ");
 //            }
 //        });
+    }
 
+    /**
+     * 遍历测试
+     */
+    static void toStringTest(){
+        Integer data[] = new Integer[] {
+                7,4,2,1,3,5,9,8,11,10,12
+        };
+        BinarySearchTree<Integer> bst = new BinarySearchTree<>();
+        for (int i = 0; i < data.length; i++) {
+            bst.add(data[i]);
+        }
+
+        BinaryTrees.println(bst);
+        System.out.println(bst);
     }
 
     /**
@@ -159,7 +174,8 @@ public class Main {// 创建比较器
 //        test3();
 //        test4();
 //        test5();
-        preorderTraversalTest();
+//        traversalTest();
+        toStringTest();
     }
 
 }
