@@ -166,9 +166,30 @@ public class Main {// 创建比较器
         System.out.println("高度: " + bst.height());
         System.out.println("是不是完全二叉树：" + bst.isComplete());
 
-        System.out.println(bst.predecessor(2));
+//        System.out.println(bst.predecessor(2));
     }
 
+    /**
+     * 删除测试
+     */
+    static void removeTest(){
+        Integer data[] = new Integer[] {
+                7,4,2,1,3,5,9,8,11,10,12,
+//                7,4,9,2,5
+        };
+        BinarySearchTree<Integer> bst = new BinarySearchTree<>();
+        for (int i = 0; i < data.length; i++) {
+            bst.add(data[i]);
+        }
+
+        BinaryTrees.println(bst);
+//        bst.remove(1);
+//        bst.remove(3);
+//        bst.remove(10);
+//        bst.remove(12);
+        bst.remove(11);
+        BinaryTrees.println(bst);
+    }
 
     /**
      * 主函数
@@ -181,7 +202,7 @@ public class Main {// 创建比较器
 //        test4();
 //        test5();
 //        traversalTest();
-        toStringTest();
+//        toStringTest();
+        removeTest();
     }
-
 }

@@ -1,5 +1,7 @@
 package com.xhp281;
 import com.xhp281.printer.BinaryTreeInfo;
+import org.w3c.dom.NodeList;
+
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Queue;
@@ -125,14 +127,6 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
     }
 
     /**
-     * 删除
-     * @param element
-     */
-    public void remove(E element){
-
-    }
-
-    /**
      * 是否包含
      * @param element
      * @return
@@ -248,6 +242,78 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         // node.parent == null && node == node.parent.left
         return node.parent;
     }
+// ================================= 删除操作
+    public void remove(E element){
+        remove(node(element));
+    }
+
+    /**
+     * 删除节点
+     * @param node
+     */
+    private void remove(Node<E> node){
+        if (node == null) return;
+        size--;
+        // 度数为2的节点
+        if (node.hasTwoChildren()){
+            // 找到后继节点
+            Node<E> sNode = successor(node);
+            // 用后继节点的值覆盖度为2的节点的值
+            node.element = sNode.element;
+            // 删除后继节点
+            node = sNode;
+        }
+
+        // 删除node节点，度为1或者0
+        Node<E> replaceElement = node.leftNode != null ? node.leftNode : node.rightNode;
+        // node 是度数为1的节点
+        if (replaceElement != null){
+            // 更改父节点
+            replaceElement.parent = node.parent;
+            // 更改 parent 的left,right指向
+            if (node.parent == null){
+                root = replaceElement;
+            }else if (node == node.parent.leftNode){
+                node.parent.leftNode  = replaceElement;
+            }else{
+                node.parent.rightNode = replaceElement;
+            }
+        }else if(node.parent == null){
+            // node 是叶子节点并且是根节点
+            root = null;
+        }else{
+            // node 叶子节点但不是根节点
+            if (node == node.parent.leftNode){
+                node.parent.leftNode  = null;
+            }else{
+                node.parent.rightNode = null;
+            }
+        }
+
+    }
+
+    /**
+     * 根据内容获取节点
+     * @param element
+     * @return
+     */
+    private Node<E> node(E element){
+        Node<E> node = root;
+        while (node != null){
+            int cmp = compare(element,node.element);
+            // 相等的时候返回
+            if (cmp == 0) return node;
+            // 输入值大于当前节点，从右面找
+            if (cmp > 0 ){
+                node = node.rightNode;
+            }else{
+                // 输入值小于当前节点，从左面开始找
+                node = node.leftNode;
+            }
+        }
+        return null;
+    }
+
 
 // ================================= 二叉树打印接口设置
     @Override
