@@ -76,6 +76,8 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
      * 清空
      */
     public void  clear(){
+        root = null;
+        size = 0;
     }
 
     /**
@@ -132,7 +134,7 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
      * @return
      */
     public boolean contains(E element){
-        return false;
+        return node();
     }
 
     /**
