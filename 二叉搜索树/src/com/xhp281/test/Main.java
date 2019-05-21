@@ -1,8 +1,7 @@
 package com.xhp281.test;
 import com.xhp281.Person;
 import java.util.Comparator;
-import com.xhp281.BinarySearchTree;
-import com.xhp281.file.Files;
+import com.xhp281.tree.BinarySearchTree;
 import com.xhp281.printer.BinaryTrees;
 
 
@@ -122,7 +121,7 @@ public class Main {// 创建比较器
             bst.add(data[i]);
         }
         BinaryTrees.println(bst);
-        bst.preorderTraversal();   // 前序遍历
+        // 前序遍历
         bst.preorderOrder(new BinarySearchTree.Visitor<Integer>() {
             public void visit(Integer element) {
               System.out.print("_" + element + "_ ");
