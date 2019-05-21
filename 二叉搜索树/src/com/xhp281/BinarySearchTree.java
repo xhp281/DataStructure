@@ -142,30 +142,6 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
     }
 
     /**
-     * 检测是不是为空
-     * @param element
-     */
-    private void checkElementIsNull(E element){
-        if (element == null) {
-             throw new IllegalArgumentException("element must be not null");
-        }
-    }
-
-    /**
-     * 比较大小
-     * @param e1
-     * @param e2
-     * @return 返回值等于0：e1 = e2 返回值大于0：e1 > e2 返回值小于0: e1 < e2
-     */
-    private int compare(E e1,E e2){
-        // 有判断条件的时候使用判断条件
-        if (comparator != null){
-            return  comparator.compare(e1, e2);
-        }
-        return ((Comparable<E>)e1).compareTo(e2);
-    }
-
-    /**
      * 判断是不是二叉树
      * @return
      */
@@ -192,6 +168,85 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
             }
         }
         return  true;
+    }
+
+    /**
+     * 检测是不是为空
+     * @param element
+     */
+    private void checkElementIsNull(E element){
+        if (element == null) {
+             throw new IllegalArgumentException("element must be not null");
+        }
+    }
+
+    /**
+     * 比较大小
+     * @param e1
+     * @param e2
+     * @return 返回值等于0：e1 = e2 返回值大于0：e1 > e2 返回值小于0: e1 < e2
+     */
+    private int compare(E e1,E e2){
+        // 有判断条件的时候使用判断条件
+        if (comparator != null){
+            return  comparator.compare(e1, e2);
+        }
+        return ((Comparable<E>)e1).compareTo(e2);
+    }
+
+    /**
+     * 获取前驱节点
+     * @param node
+     * @return
+     */
+    public Node<E> predecessor(Node<E>node){
+        if (node == null) return null;
+        // 前驱节点在左子树中
+
+        Node<E> p = node.leftNode;
+        // 左子树不为空 node.left != null
+        if (p != null){
+            // 循环遍历右子树
+            while (p.rightNode != null){
+                p = p.rightNode;
+            }
+            return p;
+        }
+
+        // node.left = null && parent != null
+        while (node.parent != null && node == node.parent.leftNode){
+              node = node.parent;
+        }
+
+        // node.parent == null && node == node.parent.right
+        return node.parent;
+    }
+    /**
+     * 获取后驱节点
+     * @param node
+     * @return
+     */
+    public Node<E> successor(Node<E>node){
+        if (node == null) return null;
+        // 前驱节点在右子树中
+
+        Node<E> p = node.rightNode;
+        // 右子树不为空 node.right != null
+        if (p != null){
+            // 循环遍历左子树
+            while (p.leftNode != null){
+                p = p.leftNode;
+            }
+            return p;
+        }
+
+        // node.right = null && parent != null
+        while (node.parent != null && node == node.parent.rightNode){
+            node = node.parent;
+        }
+
+        // node.parent == null && node == node.parent.left
+        return node.parent;
     }
 
 // ================================= 二叉树打印接口设置
@@ -386,7 +441,7 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         toString(node.rightNode,sb,prefix + "R --> ");
     }
 
-    // ===================================== 计算二叉树高度
+// ===================================== 计算二叉树高度
 
     /**
      * 方式1
@@ -441,5 +496,7 @@ public class BinarySearchTree<E> implements BinaryTreeInfo {
         if (node == null) return 0;
         return  1 + Math.max(height(node.leftNode),height(node.rightNode));
     }
+
+// ===================================== 计算二叉树高度
 
 }

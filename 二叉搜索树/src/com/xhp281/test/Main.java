@@ -165,6 +165,8 @@ public class Main {// 创建比较器
         System.out.println(bst);
         System.out.println("高度: " + bst.height());
         System.out.println("是不是完全二叉树：" + bst.isComplete());
+
+        System.out.println(bst.predecessor(2));
     }
 
 
