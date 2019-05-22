@@ -30,8 +30,11 @@ public class BST<E> extends BinaryTree<E> {
 
         // 添加第一个节点
         if (root == null){
-            root = new Node<>(element,null);
+            root = createNode(element,null);//new Node<>(element,null);
             size++;
+
+            // 添加完新节点后处理
+            fixNode(root);
             return;
         }
 
@@ -60,13 +63,16 @@ public class BST<E> extends BinaryTree<E> {
         }
         // 判断是设置为左子树还是右子树
         // 获取新节点
-        Node<E> newNode = new Node<>(element,parent);
+        Node<E> newNode = createNode(element,parent);//new Node<>(element,parent);
         if (cmp > 0){ // 右
             parent.rightNode = newNode;
         }else{
             parent.leftNode  = newNode;
         }
         size++;
+
+        // 添加完新节点后处理
+        fixNode(newNode);
     }
 
     /**
@@ -102,8 +108,14 @@ public class BST<E> extends BinaryTree<E> {
         return ((Comparable<E>)e1).compareTo(e2);
     }
 
+    /**
+     * 修复失衡节点
+     * @param node
+     */
+    protected void fixNode(Node<E>node){}
 
 // ================================= 删除操作
+
     public void remove(E element){
         remove(node(element));
     }

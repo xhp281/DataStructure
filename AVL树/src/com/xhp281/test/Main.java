@@ -1,4 +1,5 @@
 package com.xhp281.test;
+import com.xhp281.tree.AVLTree;
 import com.xhp281.tree.BST;
 import com.xhp281.printer.BinaryTrees;
 
@@ -18,7 +19,7 @@ public class Main {// 创建比较器
                 7,4,2,1,3,5,9,8,11,10,12,
 //                7,4,9,2,5
         };
-        BST<Integer> bst = new BST<>();
+        AVLTree<Integer> bst = new AVLTree<>();
         for (int i = 0; i < data.length; i++) {
             bst.add(data[i]);
         }
@@ -32,18 +33,13 @@ public class Main {// 创建比较器
         BinaryTrees.println(bst);
     }
 
+
     /**
      * 主函数
      * @param args
      */
     public static void main(String[] args) {
-//        test1();
-//        test2();
-//        test3();
-//        test4();
-//        test5();
-//        traversalTest();
-//        toStringTest();
+
         removeTest();
     }
 }

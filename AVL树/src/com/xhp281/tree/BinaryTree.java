@@ -91,6 +91,17 @@ public class BinaryTree <E> implements BinaryTreeInfo {
         }
         return  true;
     }
+
+    /**
+     * 创建节点
+     * @param element
+     * @param parent
+     * @return
+     */
+    protected Node<E> createNode(E element,Node<E> parent){
+        return new Node<>(element,parent);
+    }
+
 //======================================= 获取节点
     /**
      * 获取前驱节点
