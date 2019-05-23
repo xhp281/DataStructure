@@ -36,10 +36,10 @@ public class AVLTree<E>  extends BST<E>{
         }
 
         /* 更新自己的高度 */
-        public int updateHeight(){
+        public void updateHeight(){
             int leftHeight  = leftNode  == null ? 0 : ((AVLNode<E>)leftNode).height;
             int rightHeight = rightNode == null ? 0 : ((AVLNode<E>)rightNode).height;
-            return 1 + Math.max(leftHeight,rightHeight);
+            height = 1 + Math.max(leftHeight,rightHeight);
         }
 
         /* 获取平衡因子 */
@@ -48,35 +48,20 @@ public class AVLTree<E>  extends BST<E>{
             int rightHeight = rightNode == null ? 0 : ((AVLNode<E>)rightNode).height;
             return leftHeight - rightHeight;
         }
+
+        /* 获取度最高的节点 */
+        public Node<E> tallerChild() {
+            int leftHeight = leftNode == null ? 0 : ((AVLNode<E>) leftNode).height;
+            int rightHeight = rightNode == null ? 0 : ((AVLNode<E>) rightNode).height;
+            if (leftHeight > rightHeight) return leftNode;
+            if (leftHeight < rightHeight) return rightNode;
+            return isLeftChild() ? leftNode : rightNode;
+        }
     }
 
     /**
-     * 判断是不是平衡
+     * 调整二叉树
      * @param node
-     * @return
-     */
-    public boolean isBalance(Node<E> node){
-       return Math.abs(((AVLNode<E>)node).balanceFactor()) <= 1;
-    }
-
-    /**
-     * 更新高度
-     * @param node
-     */
-    public void updateHeight(Node<E> node){
-        ((AVLNode<E>)node).updateHeight();
-    }
-
-    /**
-     * 恢复平衡
-     * @param node
-     */
-    public void rebalance(Node<E> node){
-
-    }
-
-    /**
-     * 修复失衡节点
      */
     @Override
     protected void fixNode(Node<E> node) {
@@ -91,8 +76,68 @@ public class AVLTree<E>  extends BST<E>{
             }else{
                 // 恢复平衡
                 rebalance(node);
+                // 整棵树都恢复平衡，结束循环
+                break;
             }
         }
+    }
+    /**
+     * 判断是不是平衡
+     * @param node
+     * @return
+     */
+    public boolean isBalance(Node<E> node){
+        return Math.abs(((AVLNode<E>)node).balanceFactor()) <= 1;
+    }
+
+    /**
+     * 更新高度
+     * @param node
+     */
+    public void updateHeight(Node<E> node){
+        ((AVLNode<E>)node).updateHeight();
+    }
+
+    /**
+     * 恢复平衡
+     @param grand 高度最低的不平衡节点
+     */
+    public void rebalance(Node<E> grand){
+        Node<E> parent = ((AVLNode<E>)grand).tallerChild();
+        Node<E> node   = ((AVLNode<E>)parent).tallerChild();
+
+        // 属于左边
+        if (parent.isLeftChild()){
+            if (node.isLeftChild()){ // LL
+                rotateRight(grand);
+            }else{ // LR
+                rotateLeft(parent);
+                rotateRight(grand);
+            }
+        }else{
+            if (node.isLeftChild()){ // RL
+                rotateRight(parent);
+                rotateLeft(grand);
+            }else{ // RR
+                rotateLeft(grand);
+            }
+        }
+        }
+
+    /**
+     * 左旋转
+     * @param grand
+     */
+    private void rotateLeft(Node<E> grand){
+
+    }
+
+    /**
+     * 右旋转
+     * @param grand
+     */
+    private void rotateRight(Node<E> grand){
+
     }
 
 }
