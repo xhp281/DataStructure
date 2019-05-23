@@ -16,21 +16,14 @@ public class Main {// 创建比较器
      */
     static void removeTest(){
         Integer data[] = new Integer[] {
-                7,4,2,1,3,5,9,8,11,10,12,
-//                7,4,9,2,5
+                100, 16, 48, 39, 21, 76, 51, 97, 4, 2, 35, 93, 66, 54, 71, 17
         };
         AVLTree<Integer> bst = new AVLTree<>();
         for (int i = 0; i < data.length; i++) {
             bst.add(data[i]);
         }
+        BinaryTrees.println(bst);
 
-        BinaryTrees.println(bst);
-//        bst.remove(1);
-//        bst.remove(3);
-//        bst.remove(10);
-//        bst.remove(12);
-        bst.remove(11);
-        BinaryTrees.println(bst);
     }
 
 

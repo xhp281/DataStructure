@@ -57,6 +57,16 @@ public class AVLTree<E>  extends BST<E>{
             if (leftHeight < rightHeight) return rightNode;
             return isLeftChild() ? leftNode : rightNode;
         }
+
+        /* 打印内容 */
+        @Override
+        public String toString() {
+            String parentString = "null";
+            if (parent != null) {
+                parentString = parent.element.toString();
+            }
+            return element + "_p(" + parentString + ")_h(" + height + ")";
+        }
     }
 
     /**
@@ -99,10 +109,33 @@ public class AVLTree<E>  extends BST<E>{
     }
 
     /**
-     * 恢复平衡
+     * 恢复平衡方式1
      @param grand 高度最低的不平衡节点
      */
     public void rebalance(Node<E> grand){
+        Node<E> parent = ((AVLNode<E>)grand).tallerChild();
+        Node<E> node   = ((AVLNode<E>)parent).tallerChild();
+
+        // 属于左边
+        if (parent.isLeftChild()){
+            if (node.isLeftChild()){ // LL
+                rotate(grand,node.leftNode,node,node.rightNode,parent,parent.rightNode,grand,grand.rightNode);
+            }else{ // LR
+                rotate(grand,parent.leftNode,parent,node.leftNode,node,node.rightNode,grand,grand.rightNode);
+            }
+        }else{
+            if (node.isLeftChild()){ // RL
+                rotate(grand,grand.leftNode,grand,node.leftNode,node,node.rightNode,parent,parent.rightNode);
+            }else{ // RR
+                rotate(grand,grand.leftNode,grand,parent.leftNode,parent,node.leftNode,node,node.rightNode);
+            }
+        }
+    }
+    /**
+     * 恢复平衡方式2
+     @param grand 高度最低的不平衡节点
+     */
+    public void rebalance2(Node<E> grand){
         Node<E> parent = ((AVLNode<E>)grand).tallerChild();
         Node<E> node   = ((AVLNode<E>)parent).tallerChild();
 
@@ -122,7 +155,56 @@ public class AVLTree<E>  extends BST<E>{
                 rotateLeft(grand);
             }
         }
+     }
+
+    /**
+     * 旋转
+     */
+    private void rotate(
+            Node<E> p,
+            Node<E> a,Node<E> b,Node<E> c,
+            Node<E> d,
+            Node<E> e,Node<E> f,Node<E> g){
+
+        // 设置d成为根节点
+        d.parent = p.parent;
+        if (p.isLeftChild()){
+            p.parent.leftNode  = d;
+        }else if(p.isRightChild()){
+            p.parent.rightNode = d;
+        }else{
+            root = d;
         }
+
+        // 设置a-b-c
+        b.leftNode  = a;
+        if (a != null){
+            a.parent = b;
+        }
+        b.rightNode = c;
+        if (c != null){
+            c.parent = b;
+        }
+        updateHeight(b);
+
+        // 设置e-f-g
+        f.leftNode  = e;
+        if (e != null){
+            e.parent = f;
+        }
+        f.rightNode = g;
+        if (g != null){
+            g.parent = f;
+        }
+        updateHeight(f);
+
+        // 设置b-d-f
+        d.leftNode  = b;
+        d.rightNode = f;
+        b.parent    = d;
+        f.parent    = d;
+        updateHeight(d);
+    }
 
     /**
      * 左旋转
@@ -159,7 +241,13 @@ public class AVLTree<E>  extends BST<E>{
         afterRotate(grand,parent,parentOldRight);
     }
 
-    public void afterRotate(Node<E> grand,Node<E> parent,Node<E> child){
+    /**
+     * 旋转之后的处理
+     * @param grand
+     * @param parent
+     * @param child
+     */
+    private void afterRotate(Node<E> grand,Node<E> parent,Node<E> child){
         // 更新parent根节点
         parent.parent           = grand.parent;
 
@@ -184,5 +272,4 @@ public class AVLTree<E>  extends BST<E>{
         updateHeight(grand);
         updateHeight(parent);
     }
-
 }
