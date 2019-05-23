@@ -129,7 +129,17 @@ public class AVLTree<E>  extends BST<E>{
      * @param grand
      */
     private void rotateLeft(Node<E> grand){
+        // RR的情况
+        // 获取parent
+        Node<E> parent  = grand.rightNode;
+        Node<E> parentOldLeft = parent.leftNode;
 
+        // 交换子节点
+        grand.rightNode = parentOldLeft;
+        parent.leftNode = grand;
+
+        // 旋转之后处理
+        afterRotate(grand,parent,parentOldLeft);
     }
 
     /**
@@ -137,7 +147,42 @@ public class AVLTree<E>  extends BST<E>{
      * @param grand
      */
     private void rotateRight(Node<E> grand){
+        // LL情况
+        Node<E> parent         = grand.leftNode;
+        Node<E> parentOldRight = parent.rightNode;
 
+        // 交换子节点
+        grand.leftNode          = parentOldRight;
+        parent.rightNode        = grand;
+
+        // 旋转之后处理
+        afterRotate(grand,parent,parentOldRight);
+    }
+
+    public void afterRotate(Node<E> grand,Node<E> parent,Node<E> child){
+        // 更新parent根节点
+        parent.parent           = grand.parent;
+
+        // 设置parent在根节点的左右位置
+        if (grand.isLeftChild()){
+            grand.parent.leftNode  = parent;
+        }else  if (grand.isRightChild()){
+            grand.parent.rightNode = parent;
+        }else {
+            root = parent;
+        }
+
+        // 更新parentOldRight的parent
+        if (child != null) {
+            child.parent = grand;
+        }
+
+        // 更新grand的parent
+        grand.parent = parent;
+
+        // 更新高度
+        updateHeight(grand);
+        updateHeight(parent);
     }
 
 }
