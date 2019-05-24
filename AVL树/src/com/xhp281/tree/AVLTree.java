@@ -65,7 +65,7 @@ public class AVLTree<E>  extends BST<E>{
             if (parent != null) {
                 parentString = parent.element.toString();
             }
-            return element + "_p(" + parentString + ")_h(" + height + ")";
+            return element + "";// + "_p(" + parentString + ")_h(" + height + ")";
         }
     }
 
@@ -74,7 +74,7 @@ public class AVLTree<E>  extends BST<E>{
      * @param node
      */
     @Override
-    protected void fixNode(Node<E> node) {
+    protected void addAfterFixNode(Node<E> node) {
         // 循环
         while ((node = node.parent) != null){
 
@@ -91,6 +91,20 @@ public class AVLTree<E>  extends BST<E>{
             }
         }
     }
+    /**
+     * 删除之后调整失衡节点
+     * @param node
+     */
+    protected void removeAfterFixNode(Node<E>node){
+        while ((node = node.parent) != null){
+            if (isBalance(node)){
+                updateHeight(node);
+            }else{
+                rebalance(node);
+            }
+        }
+    }
+
     /**
      * 判断是不是平衡
      * @param node

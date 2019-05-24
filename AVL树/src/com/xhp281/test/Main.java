@@ -12,20 +12,31 @@ import com.xhp281.printer.BinaryTrees;
 public class Main {// 创建比较器
 
     /**
-     * 删除测试
+     * 测试
      */
-    static void removeTest(){
+    static void avlTest(){
         Integer data[] = new Integer[] {
                 100, 16, 48, 39, 21, 76, 51, 97, 4, 2, 35, 93, 66, 54, 71, 17
         };
-        AVLTree<Integer> bst = new AVLTree<>();
+        AVLTree<Integer> avl = new AVLTree<>();
         for (int i = 0; i < data.length; i++) {
-            bst.add(data[i]);
+            avl.add(data[i]);
         }
-        BinaryTrees.println(bst);
+        BinaryTrees.println(avl);
 
+        System.out.println("开始删除操作");
+        avl.remove(2);
+        BinaryTrees.println(avl);
     }
 
+    static void countTest(){
+        AVLTree<Integer> avl = new AVLTree<>();
+        for (int i = 0; i < 110; i++) {
+            avl.add(i);
+        }
+        BinaryTrees.println(avl);
+
+    }
 
     /**
      * 主函数
@@ -33,6 +44,7 @@ public class Main {// 创建比较器
      */
     public static void main(String[] args) {
 
-        removeTest();
+//        avlTest();
+        countTest();
     }
 }

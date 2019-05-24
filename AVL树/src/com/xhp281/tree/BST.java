@@ -34,7 +34,7 @@ public class BST<E> extends BinaryTree<E> {
             size++;
 
             // 添加完新节点后处理
-            fixNode(root);
+            addAfterFixNode(root);
             return;
         }
 
@@ -72,7 +72,7 @@ public class BST<E> extends BinaryTree<E> {
         size++;
 
         // 添加完新节点后处理
-        fixNode(newNode);
+        addAfterFixNode(newNode);
     }
 
     /**
@@ -109,10 +109,16 @@ public class BST<E> extends BinaryTree<E> {
     }
 
     /**
-     * 修复失衡节点
+     * 添加之后修复失衡节点
      * @param node
      */
-    protected void fixNode(Node<E>node){}
+    protected void addAfterFixNode(Node<E>node){}
+
+    /**
+     * 删除之后调整失衡节点
+     * @param node
+     */
+    protected void removeAfterFixNode(Node<E>node){}
 
 // ================================= 删除操作
 
@@ -162,6 +168,8 @@ public class BST<E> extends BinaryTree<E> {
                 node.parent.rightNode = null;
             }
         }
+        // 删除之后调整节点
+        removeAfterFixNode(node);
 
     }
 

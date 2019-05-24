@@ -313,7 +313,7 @@ public class BinaryTree <E> implements BinaryTreeInfo {
 
     @Override
     public Object string(Object node) {
-//        // 获取父节点内容
+        // 获取父节点内容
 //        Node<E> currNode =  (Node<E>)node;
 //        String parentString = "null";
 //        if (currNode.parent != null){
