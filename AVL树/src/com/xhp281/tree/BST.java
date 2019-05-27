@@ -157,9 +157,15 @@ public class BST<E> extends BinaryTree<E> {
             }else{
                 node.parent.rightNode = replaceElement;
             }
+
+            // 删除之后调整节点
+            removeAfterFixNode(node);
         }else if(node.parent == null){
             // node 是叶子节点并且是根节点
             root = null;
+
+            // 删除之后调整节点
+            removeAfterFixNode(node);
         }else{
             // node 叶子节点但不是根节点
             if (node == node.parent.leftNode){
@@ -167,9 +173,10 @@ public class BST<E> extends BinaryTree<E> {
             }else{
                 node.parent.rightNode = null;
             }
+
+            // 删除之后调整节点
+            removeAfterFixNode(node);
         }
-        // 删除之后调整节点
-        removeAfterFixNode(node);
 
     }
 
