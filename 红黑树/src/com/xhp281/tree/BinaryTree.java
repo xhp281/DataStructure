@@ -67,7 +67,7 @@ public class BinaryTree <E> implements BinaryTreeInfo {
         }
 
         /* 获取兄弟节点 */
-        public Node<E> sibling(Node<E> node){
+        public Node<E> sibling(){
             if (isLeftChild()){
                 return parent.rightNode;
             }

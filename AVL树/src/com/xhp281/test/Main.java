@@ -31,7 +31,7 @@ public class Main {// 创建比较器
 
     static void countTest(){
         AVLTree<Integer> avl = new AVLTree<>();
-        for (int i = 0; i < 110; i++) {
+        for (int i = 0; i < 10; i++) {
             avl.add(i);
         }
         BinaryTrees.println(avl);
@@ -44,7 +44,7 @@ public class Main {// 创建比较器
      */
     public static void main(String[] args) {
 
-//        avlTest();
-        countTest();
+        avlTest();
+//        countTest();
     }
 }
