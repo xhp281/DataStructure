@@ -94,18 +94,46 @@ public class BinaryTree <E> implements BinaryTreeInfo {
             // 如果不是叶子节点返回false
             if (leaf && !node.isLeaf()) return false;
 
-            if (node.hasTwoChildren()){
+            if (node.leftNode != null){
                 queue.offer(node.leftNode);
-                queue.offer(node.rightNode);
-            }else if (node.leftNode == null && node.rightNode != null){
+            }else if (node.rightNode != null){
                 return false;
+            }
+
+            if (node.rightNode != null){
+                queue.offer(node.rightNode);
             }else{
-                // 到此处的时候是叶子节点
                 leaf = true;
             }
         }
         return  true;
     }
+
+//    node.hasTwoChildren() 判断有问题
+//    public Boolean isComplete(){
+//        if (root == null) return false;
+//        Queue<Node<E>> queue = new LinkedList<>();
+//        queue.offer(root);
+//
+//        // 是不是叶子节点
+//        boolean leaf = false;
+//        while (!queue.isEmpty()){
+//            Node<E> node = queue.poll();
+//            // 如果不是叶子节点返回false
+//            if (leaf && !node.isLeaf()) return false;
+//
+//            if (node.hasTwoChildren()){
+//                queue.offer(node.leftNode);
+//                queue.offer(node.rightNode);
+//            }else if (node.leftNode == null && node.rightNode != null){
+//                return false;
+//            }else{
+//                // 到此处的时候是叶子节点
+//                leaf = true;
+//            }
+//        }
+//        return  true;
+//    }
 
     /**
      * 创建节点
