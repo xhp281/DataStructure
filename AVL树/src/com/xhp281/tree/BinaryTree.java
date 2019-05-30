@@ -83,13 +83,15 @@ public class BinaryTree <E> implements BinaryTreeInfo {
             // 如果不是叶子节点返回false
             if (leaf && !node.isLeaf()) return false;
 
-            if (node.hasTwoChildren()){
+            if (node.leftNode != null){
                 queue.offer(node.leftNode);
-                queue.offer(node.rightNode);
-            }else if (node.leftNode == null && node.rightNode != null){
+            }else if (node.rightNode != null){
                 return false;
+            }
+
+            if (node.rightNode != null){
+                queue.offer(node.rightNode);
             }else{
-                // 到此处的时候是叶子节点
                 leaf = true;
             }
         }
@@ -163,12 +165,66 @@ public class BinaryTree <E> implements BinaryTreeInfo {
     }
 
 //======================================= 使用访问器接口进行遍历
-    /**
+     /**
      * 访问器接口
      * @param <E>
      */
-    public static interface Visitor<E>{
-        void visit(E element);
+    public static abstract class Visitor<E>{
+        /* 是不是停止 */
+        boolean stop;
+        /* 如果返回false停止遍历 */
+        public abstract boolean visit(E element);
+    }
+
+    /**
+     * 前序遍历
+     */
+    public void preorderOrder(Visitor<E> visitor){
+        if (visitor == null) return;
+        preorderOrder(root,visitor);
+    }
+    private void preorderOrder(Node<E> node,Visitor<E> visitor){
+        if (node == null || visitor.stop) return;
+
+        visitor.stop = visitor.visit(node.element);
+        preorderOrder(node.leftNode,visitor);
+        preorderOrder(node.rightNode,visitor);
+    }
+
+    /**
+     * 中序遍历
+     * 二叉搜索树的遍历结果是可以控制升序还是降序
+     * 升序：中序遍历左子树、根节点、中序遍历右子树
+     * 降序：中序遍历右子树、根节点、中序遍历左子树
+     */
+    public void inorderOrder(Visitor<E> visitor){
+        if (visitor == null) return;
+        inorderOrder(root,visitor);
+    }
+    private void inorderOrder(Node<E> node,Visitor<E> visitor){
+        if (node == null || visitor.stop) return;
+
+        inorderOrder(node.leftNode,visitor);
+        if (visitor.stop) return;
+        visitor.stop = visitor.visit(node.element);
+        inorderOrder(node.rightNode,visitor);
+    }
+
+    /**
+     * 后序遍历遍历
+     */
+    public void postorderOrder(Visitor<E> visitor){
+        if (visitor == null) return;
+        postorderOrder(root,visitor);
+    }
+
+    private void postorderOrder(Node<E> node,Visitor<E> visitor){
+        if (node == null || visitor.stop) return;
+
+        postorderOrder(node.leftNode,visitor);
+        postorderOrder(node.rightNode,visitor);
+        if (visitor.stop) return;
+        visitor.stop = visitor.visit(node.element);
     }
 
     /**
@@ -183,7 +239,8 @@ public class BinaryTree <E> implements BinaryTreeInfo {
 
         while (!queue.isEmpty()){
             Node<E> node = queue.poll();
-            visitor.visit(node.element);
+            // 判断是不是要返回
+            if (visitor.visit(node.element)) return;
             if (node.leftNode != null){
                 queue.offer(node.leftNode);
             }
@@ -192,53 +249,7 @@ public class BinaryTree <E> implements BinaryTreeInfo {
             }
         }
     }
-    /**
-     * 后续遍历遍历
-     */
-    public void postorderOrder(Visitor<E> visitor){
-        postorderOrder(root,visitor);
-    }
 
-    private void postorderOrder(Node<E> node,Visitor<E> visitor){
-        if (node == null || visitor == null) return;
-
-        postorderOrder(node.leftNode,visitor);
-        postorderOrder(node.rightNode,visitor);
-        visitor.visit(node.element);
-    }
-
-    /**
-     * 中序遍历
-     * 二叉搜索树的遍历结果是可以控制升序还是降序
-     * 升序：中序遍历左子树、根节点、中序遍历右子树
-     * 降序：中序遍历右子树、根节点、中序遍历左子树
-     */
-    public void inorderOrder(Visitor<E> visitor){
-        inorderOrder(root,visitor);
-    }
-
-    private void inorderOrder(Node<E> node,Visitor<E> visitor){
-        if (node == null || visitor == null) return;
-
-        inorderOrder(node.leftNode,visitor);
-        visitor.visit(node.element);
-        inorderOrder(node.rightNode,visitor);
-    }
-
-    /**
-     * 前序遍历
-     */
-    public void preorderOrder(Visitor<E> visitor){
-        preorderOrder(root,visitor);
-    }
-
-    private void preorderOrder(Node<E> node,Visitor<E> visitor){
-        if (node == null || visitor == null) return;
-
-        visitor.visit(node.element);
-        preorderOrder(node.leftNode,visitor);
-        preorderOrder(node.rightNode,visitor);
-    }
 
 // ===================================== 计算二叉树高度
     /**

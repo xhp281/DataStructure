@@ -118,7 +118,7 @@ public class BST<E> extends BinaryTree<E> {
      * 删除之后调整失衡节点
      * @param node
      */
-    protected void removeAfterFixNode(Node<E>node){}
+    protected void removeAfterFixNode(Node<E>node,Node<E> replaceElement){}
 
 // ================================= 删除操作
 
@@ -159,13 +159,13 @@ public class BST<E> extends BinaryTree<E> {
             }
 
             // 删除之后调整节点
-            removeAfterFixNode(node);
+            removeAfterFixNode(node,replaceElement);
         }else if(node.parent == null){
             // node 是叶子节点并且是根节点
             root = null;
 
             // 删除之后调整节点
-            removeAfterFixNode(node);
+            removeAfterFixNode(node,null);
         }else{
             // node 叶子节点但不是根节点
             if (node == node.parent.leftNode){
@@ -175,7 +175,7 @@ public class BST<E> extends BinaryTree<E> {
             }
 
             // 删除之后调整节点
-            removeAfterFixNode(node);
+            removeAfterFixNode(node,null);
         }
 
     }

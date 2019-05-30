@@ -86,7 +86,18 @@ public class RBTree<E> extends BBST<E> {
      * @param node
      */
     @Override
-    protected void removeAfterFixNode(Node<E> node) {
+    protected void removeAfterFixNode(Node<E> node,Node<E> replaceElement) {
+        // 删除红色节点
+        if (isRed(node)) return;
+
+        // 用以取代的节点是红色
+        if (isRed(replaceElement)){
+            black(replaceElement);
+            return;
+        }
+
+        // 删除的是黑色叶子节点
+
     }
 
     //=================================== 功能方法

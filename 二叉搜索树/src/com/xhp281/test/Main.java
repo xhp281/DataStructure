@@ -3,6 +3,7 @@ import com.xhp281.Person;
 import java.util.Comparator;
 import com.xhp281.tree.BinarySearchTree;
 import com.xhp281.printer.BinaryTrees;
+import com.xhp281.tree.BinaryTree;
 
 
 /**
@@ -122,27 +123,35 @@ public class Main {// 创建比较器
         }
         BinaryTrees.println(bst);
         // 前序遍历
-        bst.preorderOrder(new BinarySearchTree.Visitor<Integer>() {
-            public void visit(Integer element) {
-              System.out.print("_" + element + "_ ");
-            }
-        });
-//        bst.inorderTraversal();    // 中序遍历
-//        bst.inorderOrder(new BinarySearchTree.Visitor<Integer>() {
-//            public void visit(Integer element) {
-//              System.out.print("_" + element + "_ ");
+//        bst.preorderOrder(new BinarySearchTree.Visitor<Integer>() {
+//            @Override
+//            public boolean visit(Integer element) {
+//                System.out.print(" " + element + " ");
+//                return element == 10 ? true : false;  // 停止条件
 //            }
 //        });
-//        bst.postorderTraversal();  // 后续遍历
+        // 中序遍历
+        bst.inorderOrder(new BinarySearchTree.Visitor<Integer>() {
+            @Override
+            public boolean visit(Integer element) {
+                System.out.print(" " + element + " ");
+                return element == 10 ? true : false;  // 停止条件
+            }
+        });
+//        // 后续遍历
 //        bst.postorderOrder(new BinarySearchTree.Visitor<Integer>() {
-//           public void visit(Integer element) {
-//             System.out.print("_" + element + "_ ");
-//           }
+//            @Override
+//            public boolean visit(Integer element) {
+//                System.out.print(" " + element + " ");
+//                return element == 10 ? true : false;  // 停止条件
+//            }
 //        });
-//        bst.levelOrderTraversal(); // 层序遍历
+//        // 层序遍历
 //        bst.levelOrder(new BinarySearchTree.Visitor<Integer>() {
-//            public void visit(Integer element) {
-//               System.out.print("_" + element + "_ ");
+//            @Override
+//            public boolean visit(Integer element) {
+//                System.out.print(" " + element + " ");
+//                return element == 10 ? true : false;  // 停止条件
 //            }
 //        });
     }
@@ -200,8 +209,8 @@ public class Main {// 创建比较器
 //        test3();
 //        test4();
 //        test5();
-//        traversalTest();
+        traversalTest();
 //        toStringTest();
-        removeTest();
+//        removeTest();
     }
 }

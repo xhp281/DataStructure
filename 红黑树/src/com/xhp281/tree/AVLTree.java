@@ -99,7 +99,7 @@ public class AVLTree<E>  extends BBST<E>{
      * 删除之后调整失衡节点
      * @param node
      */
-    protected void removeAfterFixNode(Node<E>node){
+    protected void removeAfterFixNode(Node<E>node,Node<E> replaceElement){
         while ((node = node.parent) != null){
             if (isBalance(node)){
                 updateHeight(node);
