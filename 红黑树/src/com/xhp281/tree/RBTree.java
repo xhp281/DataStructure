@@ -94,8 +94,86 @@ public class RBTree<E> extends BBST<E> {
             return;
         }
 
-        // 删除的是黑色叶子节点
+        // 删除的是根节点
+        Node<E> parent = node.parent;
+        if (parent == null) return;
 
+        // 删除的是黑色叶子节点
+        // 判断被删除的节点是左还是右
+        // 父节点左边是空，证明是属于左子树
+        boolean left = parent.leftNode == null || node.isLeftChild();
+        // 左子树的兄弟节点取右，右子树取左
+        Node<E> sibling = left ? parent.rightNode : parent.leftNode;
+
+        // 被删除的节点在左边，兄弟节点在右边
+        if (left){
+            if (isRed(sibling)){ // 兄弟节点是红色
+                black(sibling);
+                red(parent);
+                rotateLeft(sibling);
+
+                // 更换兄弟节点
+                sibling = parent.rightNode;
+            }
+
+            // 兄弟节点都是黑色
+            if (isBlack(sibling.leftNode) && isBlack(sibling.rightNode)){
+                // 染色之前判断父节点是不是黑色
+                boolean parentIsBlack = isBlack(parent);
+                red(sibling);
+                black(parent);
+                if (parentIsBlack){
+                    // 递归调用处理
+                    removeAfterFixNode(parent,null);
+                }
+            }else{
+                // 兄弟节点至少有一个红色子节点，向兄弟节点借元素
+                // 兄弟节点左边是黑色，兄弟要先旋转
+                if (isBlack(sibling.rightNode)){
+                    rotateRight(sibling);
+                    sibling = parent.rightNode;
+                }
+
+                color(sibling,colorOf(parent));
+                black(sibling.rightNode);
+                black(parent);
+                rotateLeft(parent);
+            }
+        }else{
+            // 被删除的节点在右边，兄弟节点在左边
+            if (isRed(sibling)){ // 兄弟节点是红色
+                black(sibling);
+                red(parent);
+                rotateRight(sibling);
+
+                // 更换兄弟节点
+                sibling = parent.leftNode;
+            }
+
+            // 兄弟节点都是黑色
+            if (isBlack(sibling.leftNode) && isBlack(sibling.rightNode)){
+                // 染色之前判断父节点是不是黑色
+                boolean parentIsBlack = isBlack(parent);
+                red(sibling);
+                black(parent);
+                if (parentIsBlack){
+                    // 递归调用处理
+                    removeAfterFixNode(parent,null);
+                }
+            }else{
+                // 兄弟节点至少有一个红色子节点，向兄弟节点借元素
+                // 兄弟节点左边是黑色，兄弟要先旋转
+                if (isBlack(sibling.leftNode)){
+                    rotateLeft(sibling);
+                    sibling = parent.leftNode;
+                }
+
+                color(sibling,colorOf(parent));
+                black(sibling.leftNode);
+                black(parent);
+                rotateRight(parent);
+            }
+        }
     }
 
     //=================================== 功能方法

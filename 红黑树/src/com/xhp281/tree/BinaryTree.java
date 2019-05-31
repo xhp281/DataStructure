@@ -334,12 +334,12 @@ public class BinaryTree <E> implements BinaryTreeInfo {
     @Override
     public Object string(Object node) {
         // 获取父节点内容
-        Node<E> currNode =  (Node<E>)node;
-        String parentString = "null";
-        if (currNode.parent != null){
-            parentString = currNode.parent.element.toString();
-        }
-        return currNode.element + "(" + parentString + ")";
-//        return node;
+//        Node<E> currNode =  (Node<E>)node;
+//        String parentString = "null";
+//        if (currNode.parent != null){
+//            parentString = currNode.parent.element.toString();
+//        }
+//        return currNode.element + "(" + parentString + ")";
+        return node;
     }
 }

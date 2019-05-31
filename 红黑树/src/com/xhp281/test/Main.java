@@ -4,6 +4,7 @@ import com.xhp281.tree.BST;
 import com.xhp281.printer.BinaryTrees;
 import com.xhp281.tree.BinaryTree;
 import com.xhp281.tree.BinaryTree.Visitor;
+import com.xhp281.tree.RBTree;
 
 /**
  * User: FenDou
@@ -85,10 +86,31 @@ public class Main {// 创建比较器
     }
 
     /**
+     * 测试
+     */
+    static void test3(){
+        Integer data[] = new Integer[] {
+                9, 80, 33, 5, 67, 17, 11
+        };
+        RBTree<Integer> rbTree = new RBTree<>();
+        for (int i = 0; i < data.length; i++) {
+            rbTree.add(data[i]);
+        }
+        BinaryTrees.println(rbTree);
+        System.out.println("删除之后");
+        rbTree.remove(17);
+        rbTree.remove(80);
+        rbTree.remove(11);
+        rbTree.remove(9);
+        rbTree.remove(5);
+
+        BinaryTrees.println(rbTree);
+    }
+    /**
      * 主函数
      * @param args
      */
     public static void main(String[] args) {
-        test2();
+        test3();
     }
 }
