@@ -56,6 +56,16 @@ public class ArrayList<E> extends AbstractList<E> {
         }
         return ELEMENT_NOT_FOUND;
     }
+    public int indexOf2(E element){
+        for (int i = 0; i < size; i++) {
+            if (valEquals(element,elements[i])) return i;
+        }
+        return ELEMENT_NOT_FOUND;
+    }
+
+    private boolean valEquals(Object v1,Object v2){
+        return v1 == null ? v2 == null : v1.equals(v2);
+    }
 
     /**
      *  根据下标获取元素
