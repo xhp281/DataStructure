@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="78951639-74a0-409b-99ed-8cc215a614f9" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/xhp281/map/Map.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/xhp281/map/TreeMap.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/xhp281/set/Set.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/xhp281/set/TreeSet.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/xhp281/test.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/映射.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/com/xhp281/map/TreeMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/xhp281/map/TreeMap.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../红黑树/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../红黑树/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../红黑树/src/com/xhp281/test/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/../红黑树/src/com/xhp281/test/Main.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../红黑树/src/com/xhp281/tree/AVLTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/../红黑树/src/com/xhp281/tree/AVLTree.java" afterDir="false" />
@@ -64,11 +55,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/xhp281/map/TreeMap.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="215">
-              <caret line="93" column="24" lean-forward="true" selection-start-line="93" selection-start-column="24" selection-end-line="93" selection-end-column="24" />
+            <state relative-caret-position="501">
+              <caret line="52" column="29" lean-forward="true" selection-start-line="52" selection-start-column="29" selection-end-line="52" selection-end-column="29" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#378#379#0" expanded="true" />
@@ -85,7 +76,6 @@
                 <element signature="e#2132#2133#0" expanded="true" />
                 <element signature="e#2351#2352#0" expanded="true" />
                 <element signature="e#2404#2405#0" expanded="true" />
-                <element signature="e#2768#3274#1" />
                 <element signature="e#3951#3952#0" expanded="true" />
                 <element signature="e#3990#3991#0" expanded="true" />
                 <element signature="e#4033#4034#0" expanded="true" />
@@ -109,11 +99,11 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/xhp281/test.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="498">
-              <caret line="70" column="28" lean-forward="true" selection-start-line="70" selection-start-column="28" selection-end-line="70" selection-end-column="28" />
+            <state relative-caret-position="289">
+              <caret line="59" column="21" lean-forward="true" selection-start-line="59" selection-start-column="21" selection-end-line="59" selection-end-column="21" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#403#610#0" expanded="true" />
@@ -122,9 +112,18 @@
                 <element signature="e#1463#1464#0" expanded="true" />
                 <element signature="e#1744#1921#0" expanded="true" />
                 <element signature="e#1920#1921#0" expanded="true" />
-                <element signature="e#625#626#0" expanded="true" />
-                <element signature="e#648#649#0" expanded="true" />
+                <element signature="e#2003#2004#0" expanded="true" />
+                <element signature="e#2026#2027#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_211.jdk/Contents/Home/src.zip!/java/util/TreeMap.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="226">
+              <caret line="2413" column="7" lean-forward="true" selection-start-line="2413" selection-start-column="7" selection-end-line="2413" selection-end-column="7" />
             </state>
           </provider>
         </entry>
@@ -180,7 +179,9 @@
       <find>size</find>
       <find>comparator</find>
       <find>predecessor</find>
+      <find>fix</find>
       <find>traversal</find>
+      <find>afterRemove</find>
     </findStrings>
     <replaceStrings>
       <replace>&lt;K,V&gt;</replace>
@@ -188,21 +189,22 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="WARN_ABOUT_CRLF" value="false" />
   </component>
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/com/xhp281/map/Map.java" />
-        <option value="$PROJECT_DIR$/src/com/xhp281/map/TreeMap.java" />
         <option value="$PROJECT_DIR$/src/com/xhp281/set/Set.java" />
         <option value="$PROJECT_DIR$/src/com/xhp281/set/TreeSet.java" />
         <option value="$PROJECT_DIR$/src/com/xhp281/test.java" />
+        <option value="$PROJECT_DIR$/src/com/xhp281/map/TreeMap.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="2097" />
-    <option name="y" value="-96" />
+    <option name="x" value="2197" />
+    <option name="y" value="-252" />
     <option name="width" value="1589" />
     <option name="height" value="1173" />
   </component>
@@ -239,6 +241,14 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="com" type="462c0819:PsiDirectoryNode" />
               <item name="xhp281" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="映射" type="b2602c69:ProjectViewProjectNode" />
+              <item name="映射" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="xhp281" type="462c0819:PsiDirectoryNode" />
+              <item name="map" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -283,6 +293,9 @@
       </list>
     </recent_temporary>
   </component>
+  <component name="StructureViewFactory">
+    <option name="ACTIVE_ACTIONS" value=",ALPHA_COMPARATOR" />
+  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
@@ -294,10 +307,18 @@
       <option name="presentableId" value="Default" />
       <updated>1559626465725</updated>
     </task>
+    <task id="LOCAL-00001" summary="- 红黑树实现映射&#10;- 集合实现映射">
+      <created>1559642320476</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1559642320476</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="2097" y="-96" width="1589" height="1173" extended-state="0" />
+    <frame x="2197" y="-252" width="1589" height="1173" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Image Layers" />
@@ -305,15 +326,15 @@
       <window_info id="UI Designer" />
       <window_info id="Capture Tool" />
       <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24951519" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49952427" visible="true" weight="0.24951519" />
+      <window_info active="true" id="Structure" order="1" sideWeight="0.50047576" side_tool="true" visible="true" weight="0.24951519" />
       <window_info anchor="bottom" id="Version Control" />
       <window_info anchor="bottom" id="Terminal" />
       <window_info anchor="bottom" id="Event Log" side_tool="true" />
       <window_info anchor="bottom" id="Messages" weight="0.3293247" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.33302498" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.027752081" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -328,54 +349,15 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
     </layout>
   </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="- 红黑树实现映射&#10;- 集合实现映射" />
+    <option name="LAST_COMMIT_MESSAGE" value="- 红黑树实现映射&#10;- 集合实现映射" />
+  </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/com/xhp281/map/Map.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="399">
           <caret line="21" column="32" selection-start-line="21" selection-start-column="32" selection-end-line="21" selection-end-column="32" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/xhp281/map/TreeMap.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
-          <caret line="93" column="24" lean-forward="true" selection-start-line="93" selection-start-column="24" selection-end-line="93" selection-end-column="24" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#378#379#0" expanded="true" />
-            <element signature="e#404#405#0" expanded="true" />
-            <element signature="e#452#453#0" expanded="true" />
-            <element signature="e#496#497#0" expanded="true" />
-            <element signature="e#311#312#0" expanded="true" />
-            <element signature="e#338#339#0" expanded="true" />
-            <element signature="e#370#371#0" expanded="true" />
-            <element signature="e#402#403#0" expanded="true" />
-            <element signature="e#512#513#0" expanded="true" />
-            <element signature="e#539#540#0" expanded="true" />
-            <element signature="e#2096#2097#0" expanded="true" />
-            <element signature="e#2132#2133#0" expanded="true" />
-            <element signature="e#2351#2352#0" expanded="true" />
-            <element signature="e#2404#2405#0" expanded="true" />
-            <element signature="e#2768#3274#1" />
-            <element signature="e#3951#3952#0" expanded="true" />
-            <element signature="e#3990#3991#0" expanded="true" />
-            <element signature="e#4033#4034#0" expanded="true" />
-            <element signature="e#4074#4075#0" expanded="true" />
-            <element signature="e#4122#4123#0" expanded="true" />
-            <element signature="e#4178#4179#0" expanded="true" />
-            <element signature="e#4233#4234#0" expanded="true" />
-            <element signature="e#4278#4279#0" expanded="true" />
-            <element signature="e#4321#4322#0" expanded="true" />
-            <element signature="e#4364#4365#0" expanded="true" />
-            <element signature="e#1084#1085#0" expanded="true" />
-            <element signature="e#1144#1145#0" expanded="true" />
-            <element signature="e#1187#1188#0" expanded="true" />
-            <element signature="e#1247#1248#0" expanded="true" />
-            <element signature="e#1287#1288#0" expanded="true" />
-            <element signature="e#1355#1356#0" expanded="true" />
-            <element signature="e#1396#1397#0" expanded="true" />
-            <element signature="e#1465#1466#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -410,10 +392,17 @@
         </state>
       </provider>
     </entry>
+    <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_211.jdk/Contents/Home/src.zip!/java/util/TreeMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="226">
+          <caret line="2413" column="7" lean-forward="true" selection-start-line="2413" selection-start-column="7" selection-end-line="2413" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/xhp281/test.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="498">
-          <caret line="70" column="28" lean-forward="true" selection-start-line="70" selection-start-column="28" selection-end-line="70" selection-end-column="28" />
+        <state relative-caret-position="289">
+          <caret line="59" column="21" lean-forward="true" selection-start-line="59" selection-start-column="21" selection-end-line="59" selection-end-column="21" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#403#610#0" expanded="true" />
@@ -422,8 +411,50 @@
             <element signature="e#1463#1464#0" expanded="true" />
             <element signature="e#1744#1921#0" expanded="true" />
             <element signature="e#1920#1921#0" expanded="true" />
-            <element signature="e#625#626#0" expanded="true" />
-            <element signature="e#648#649#0" expanded="true" />
+            <element signature="e#2003#2004#0" expanded="true" />
+            <element signature="e#2026#2027#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/xhp281/map/TreeMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="501">
+          <caret line="52" column="29" lean-forward="true" selection-start-line="52" selection-start-column="29" selection-end-line="52" selection-end-column="29" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#378#379#0" expanded="true" />
+            <element signature="e#404#405#0" expanded="true" />
+            <element signature="e#452#453#0" expanded="true" />
+            <element signature="e#496#497#0" expanded="true" />
+            <element signature="e#311#312#0" expanded="true" />
+            <element signature="e#338#339#0" expanded="true" />
+            <element signature="e#370#371#0" expanded="true" />
+            <element signature="e#402#403#0" expanded="true" />
+            <element signature="e#512#513#0" expanded="true" />
+            <element signature="e#539#540#0" expanded="true" />
+            <element signature="e#2096#2097#0" expanded="true" />
+            <element signature="e#2132#2133#0" expanded="true" />
+            <element signature="e#2351#2352#0" expanded="true" />
+            <element signature="e#2404#2405#0" expanded="true" />
+            <element signature="e#3951#3952#0" expanded="true" />
+            <element signature="e#3990#3991#0" expanded="true" />
+            <element signature="e#4033#4034#0" expanded="true" />
+            <element signature="e#4074#4075#0" expanded="true" />
+            <element signature="e#4122#4123#0" expanded="true" />
+            <element signature="e#4178#4179#0" expanded="true" />
+            <element signature="e#4233#4234#0" expanded="true" />
+            <element signature="e#4278#4279#0" expanded="true" />
+            <element signature="e#4321#4322#0" expanded="true" />
+            <element signature="e#4364#4365#0" expanded="true" />
+            <element signature="e#1084#1085#0" expanded="true" />
+            <element signature="e#1144#1145#0" expanded="true" />
+            <element signature="e#1187#1188#0" expanded="true" />
+            <element signature="e#1247#1248#0" expanded="true" />
+            <element signature="e#1287#1288#0" expanded="true" />
+            <element signature="e#1355#1356#0" expanded="true" />
+            <element signature="e#1396#1397#0" expanded="true" />
+            <element signature="e#1465#1466#0" expanded="true" />
           </folding>
         </state>
       </provider>

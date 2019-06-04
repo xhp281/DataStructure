@@ -50,7 +50,8 @@ public class TreeMap<K,V> implements Map<K, V> {
             root = new Node<>(key,value,null);
             size++;
             // 新添加节点之后的处理
-            afterPut(root);
+//            afterPut(root);
+            black(root);
             return null;
         }
 
@@ -176,9 +177,6 @@ public class TreeMap<K,V> implements Map<K, V> {
             afterRemove(replacement);
         } else if (node.parent == null) { // node是叶子节点并且是根节点
             root = null;
-
-            // 删除节点之后的处理
-            afterRemove(node);
         } else { // node是叶子节点，但不是根节点
             if (node == node.parent.left) {
                 node.parent.left = null;
@@ -243,8 +241,6 @@ public class TreeMap<K,V> implements Map<K, V> {
         }
 
         Node<K,V> parent = node.parent;
-        // 删除的是根节点
-        if (parent == null) return;
 
         // 删除的是黑色叶子节点【下溢】
         // 判断被删除的node是左还是右
