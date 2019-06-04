@@ -1,221 +1,158 @@
 package com.xhp281.tree;
+
 import java.util.Comparator;
 
-/**
- * User: FenDou
- * Date: 2019-05-17 13:53
- * Description: 二叉搜索树
- */
-
+@SuppressWarnings("unchecked")
 public class BST<E> extends BinaryTree<E> {
+	private Comparator<E> comparator;
+	
+	public BST() {
+		this(null);
+	}
+	
+	public BST(Comparator<E> comparator) {
+		this.comparator = comparator;
+	}
 
-    private Comparator<E> comparator;
+	public void add(E element) {
+		elementNotNullCheck(element);
+		
+		// 添加第一个节点
+		if (root == null) {
+			root = createNode(element, null);
+			size++;
 
-    /**
-     * 初始化方式
-     */
-    public BST(){
-        this(null);
-    }
-    public BST(Comparator<E> comparator) {
-        this.comparator = comparator;
-    }
+			// 新添加节点之后的处理
+			afterAdd(root);
+			return;
+		}
+		
+		// 添加的不是第一个节点
+		// 找到父节点
+		Node<E> parent = root;
+		Node<E> node = root;
+		int cmp = 0;
+		do {
+			cmp = compare(element, node.element);
+			parent = node;
+			if (cmp > 0) {
+				node = node.right;
+			} else if (cmp < 0) {
+				node = node.left;
+			} else { // 相等
+				node.element = element;
+				return;
+			}
+		} while (node != null);
 
-    /**
-     * 添加
-     * @param element
-     */
-    public void add(E element){
-        checkElementIsNull(element);
+		// 看看插入到父节点的哪个位置
+		Node<E> newNode = createNode(element, parent);
+		if (cmp > 0) {
+			parent.right = newNode;
+		} else {
+			parent.left = newNode;
+		}
+		size++;
+		
+		// 新添加节点之后的处理
+		afterAdd(newNode);
+	}
+	
+	/**
+	 * 添加node之后的调整
+	 * @param node 新添加的节点
+	 */
+	protected void afterAdd(Node<E> node) { }
+	
+	/**
+	 * 删除node之后的调整
+	 * @param node 被删除的节点 或者 用以取代被删除节点的子节点（当被删除节点的度为1）
+	 */
+	protected void afterRemove(Node<E> node) { }
 
-        // 添加第一个节点
-        if (root == null){
-            root = createNode(element,null);//new Node<>(element,null);
-            size++;
+	public void remove(E element) {
+		remove(node(element));
+	}
 
-            // 添加完新节点后处理
-            addAfterFixNode(root);
-            return;
-        }
-
-        // 父节点
-        Node<E> parent = root;
-        // 添加其他节点，首先找到父节点
-        Node<E> node = root;
-        // 比较结果
-        int cmp = 0;
-        while (node != null){
-            // 比较大小
-            cmp = compare(element,node.element);
-            // 获取父节点
-            parent = node;
-            // 新元素 > 父节点：去右边查找
-            if (cmp > 0){
-                node = node.rightNode;
-                // 新元素< 父节点：去左边查找
-            }else if (cmp < 0){
-                node = node.leftNode;
-            }else{
-                // 相等直接返回
-                node.element = element;
-                return;
-            }
-        }
-        // 判断是设置为左子树还是右子树
-        // 获取新节点
-        Node<E> newNode = createNode(element,parent);//new Node<>(element,parent);
-        if (cmp > 0){ // 右
-            parent.rightNode = newNode;
-        }else{
-            parent.leftNode  = newNode;
-        }
-        size++;
-
-        // 添加完新节点后处理
-        addAfterFixNode(newNode);
-    }
-
-    /**
-     * 是否包含
-     * @param element
-     * @return
-     */
-    public boolean contains(E element){
-        return node(element) != null;
-    }
-
-    /**
-     * 检测是不是为空
-     * @param element
-     */
-    private void checkElementIsNull(E element){
-        if (element == null) {
-             throw new IllegalArgumentException("element must be not null");
-        }
-    }
-
-    /**
-     * 比较大小
-     * @param e1
-     * @param e2
-     * @return 返回值等于0：e1 = e2 返回值大于0：e1 > e2 返回值小于0: e1 < e2
-     */
-    private int compare(E e1,E e2){
-        // 有判断条件的时候使用判断条件
-        if (comparator != null){
-            return  comparator.compare(e1, e2);
-        }
-        return ((Comparable<E>)e1).compareTo(e2);
-    }
-
-    /**
-     * 添加之后修复失衡节点
-     * @param node
-     */
-    protected void addAfterFixNode(Node<E>node){}
-
-    /**
-     * 删除之后调整失衡节点
-     * @param node
-     */
-    protected void removeAfterFixNode(Node<E>node,Node<E> replaceElement){}
-
-// ================================= 删除操作
-
-    public void remove(E element){
-        remove(node(element));
-    }
-
-    /**
-     * 删除节点
-     * @param node
-     */
-    private void remove(Node<E> node){
-        if (node == null) return;
-        size--;
-        // 度数为2的节点
-        if (node.hasTwoChildren()){
-            // 找到后继节点
-            Node<E> sNode = successor(node);
-            // 用后继节点的值覆盖度为2的节点的值
-            node.element = sNode.element;
-            // 删除后继节点
-            node = sNode;
-        }
-
-        // 删除node节点，度为1或者0
-        Node<E> replaceElement = node.leftNode != null ? node.leftNode : node.rightNode;
-        // node 是度数为1的节点
-        if (replaceElement != null){
-            // 更改父节点
-            replaceElement.parent = node.parent;
-            // 更改 parent 的left,right指向
-            if (node.parent == null){
-                root = replaceElement;
-            }else if (node == node.parent.leftNode){
-                node.parent.leftNode  = replaceElement;
-            }else{
-                node.parent.rightNode = replaceElement;
-            }
-
-            // 删除之后调整节点
-            removeAfterFixNode(node,replaceElement);
-        }else if(node.parent == null){
-            // node 是叶子节点并且是根节点
-            root = null;
-
-            // 删除之后调整节点
-            removeAfterFixNode(node,null);
-        }else{
-            // node 叶子节点但不是根节点
-            if (node == node.parent.leftNode){
-                node.parent.leftNode  = null;
-            }else{
-                node.parent.rightNode = null;
-            }
-
-            // 删除之后调整节点
-            removeAfterFixNode(node,null);
-        }
-
-    }
-
-    /**
-     * 根据内容获取节点
-     * @param element
-     * @return
-     */
-    private Node<E> node(E element){
-        Node<E> node = root;
-        while (node != null){
-            int cmp = compare(element,node.element);
-            // 相等的时候返回
-            if (cmp == 0) return node;
-            // 输入值大于当前节点，从右面找
-            if (cmp > 0 ){
-                node = node.rightNode;
-            }else{
-                // 输入值小于当前节点，从左面开始找
-                node = node.leftNode;
-            }
-        }
-        return null;
-    }
-
-//    // ================================== 打印方法
-//
-//    @Override
-//    public String toString() {
-//        StringBuilder sb = new StringBuilder();
-//        toString(root,sb,"");
-//        return sb.toString();
-//    }
-//    private void toString(Node<E> node,StringBuilder sb,String prefix){
-//        if (node == null) return;
-//        sb.append(prefix).append(node.element).append("\n");
-//        toString(node.leftNode,sb,prefix + "L --> ");
-//        toString(node.rightNode,sb,prefix + "R --> ");
-//    }
-
-
+	public boolean contains(E element) {
+		return node(element) != null;
+	}
+	
+	private void remove(Node<E> node) {
+		if (node == null) return;
+		
+		size--;
+		
+		if (node.hasTwoChildren()) { // 度为2的节点
+			// 找到后继节点
+			Node<E> s = successor(node);
+			// 用后继节点的值覆盖度为2的节点的值
+			node.element = s.element;
+			// 删除后继节点
+			node = s;
+		}
+		
+		// 删除node节点（node的度必然是1或者0）
+		Node<E> replacement = node.left != null ? node.left : node.right;
+		
+		if (replacement != null) { // node是度为1的节点
+			// 更改parent
+			replacement.parent = node.parent;
+			// 更改parent的left、right的指向
+			if (node.parent == null) { // node是度为1的节点并且是根节点
+				root = replacement;
+			} else if (node == node.parent.left) {
+				node.parent.left = replacement;
+			} else { // node == node.parent.right
+				node.parent.right = replacement;
+			}
+			
+			// 删除节点之后的处理
+			afterRemove(replacement);
+		} else if (node.parent == null) { // node是叶子节点并且是根节点
+			root = null;
+			
+			// 删除节点之后的处理
+			afterRemove(node);
+		} else { // node是叶子节点，但不是根节点
+			if (node == node.parent.left) {
+				node.parent.left = null;
+			} else { // node == node.parent.right
+				node.parent.right = null;
+			}
+			
+			// 删除节点之后的处理
+			afterRemove(node);
+		}
+	}
+	
+	private Node<E> node(E element) {
+		Node<E> node = root;
+		while (node != null) {
+			int cmp = compare(element, node.element);
+			if (cmp == 0) return node;
+			if (cmp > 0) {
+				node = node.right;
+			} else { // cmp < 0
+				node = node.left;
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * @return 返回值等于0，代表e1和e2相等；返回值大于0，代表e1大于e2；返回值小于于0，代表e1小于e2
+	 */
+	private int compare(E e1, E e2) {
+		if (comparator != null) {
+			return comparator.compare(e1, e2);
+		}
+		return ((Comparable<E>)e1).compareTo(e2);
+	}
+	
+	private void elementNotNullCheck(E element) {
+		if (element == null) {
+			throw new IllegalArgumentException("element must not be null");
+		}
+	}
 }

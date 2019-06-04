@@ -3,6 +3,8 @@ package com.xhp281.test;
 import com.xhp281.common.Times;
 import com.xhp281.file.FileInfo;
 import com.xhp281.file.Files;
+import com.xhp281.printer.BinaryTreeInfo;
+import com.xhp281.printer.BinaryTrees;
 import com.xhp281.set.LinkSet;
 import com.xhp281.set.Set;
 import com.xhp281.set.TreeSet;
@@ -43,6 +45,9 @@ public class Main {
         set.add(13);
         set.add(14);
         set.add(14);
+        for (int i = 0; i < set.size(); i++) {
+            set.remove(i);
+        }
         set.traversal(new Set.Visitor<Integer>() {
             @Override
             public boolean visit(Integer element) {
@@ -60,7 +65,6 @@ public class Main {
 
         String[] words = fileInfo.words();
         System.out.println("单词数量：" +  words.length);
-        System.out.println("单词：" +  words);
 
         // 链表测试
         Times.test("LinkSet", new Times.Task() {
@@ -88,7 +92,6 @@ public class Main {
             set.contains(words[i]);
         }
         for (int i = 0; i < words.length; i++) {
-            System.out.println(words[i]);
             set.remove(words[i]);
         }
     }

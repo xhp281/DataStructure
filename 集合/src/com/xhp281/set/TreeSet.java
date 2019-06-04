@@ -3,6 +3,8 @@ package com.xhp281.set;
 import com.xhp281.tree.BinaryTree;
 import com.xhp281.tree.RBTree;
 
+import java.util.Comparator;
+
 /**
  * User: FenDou
  * Date: 2019-06-03 17:53
@@ -11,7 +13,14 @@ import com.xhp281.tree.RBTree;
 
 public class TreeSet<E> implements Set<E> {
 
-    RBTree<E> rbTree = new RBTree<>();
+    RBTree<E> rbTree;
+
+    public TreeSet(Comparator<E> comparator){
+        rbTree = new RBTree<>();
+    }
+    public TreeSet(){
+        this(null);
+    }
 
     @Override
     public int size() {
@@ -20,7 +29,7 @@ public class TreeSet<E> implements Set<E> {
 
     @Override
     public boolean isEmpty() {
-        return rbTree.isempry();
+        return rbTree.isEmpty();
     }
 
     @Override
@@ -45,7 +54,7 @@ public class TreeSet<E> implements Set<E> {
 
     @Override
     public void traversal(Visitor<E> visitor) {
-        rbTree.inorderOrder(new BinaryTree.Visitor<E>() {
+        rbTree.inorder(new BinaryTree.Visitor<E>() {
             @Override
             public boolean visit(E element) {
                 return visitor.visit(element);

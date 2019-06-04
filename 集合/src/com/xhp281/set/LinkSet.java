@@ -12,6 +12,7 @@ public class LinkSet<E> implements Set<E> {
     // 创建链表对象
     LinkedList<E> list = new LinkedList<>();
 
+
     @Override
     public int size() {
         return list.size();

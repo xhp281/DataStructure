@@ -96,6 +96,7 @@ public class Main {// 创建比较器
         for (int i = 0; i < data.length; i++) {
             rbTree.add(data[i]);
         }
+
         BinaryTrees.println(rbTree);
         System.out.println("删除之后");
         rbTree.remove(17);
