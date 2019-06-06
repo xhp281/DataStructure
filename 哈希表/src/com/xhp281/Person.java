@@ -30,6 +30,7 @@ public class Person {
                 && person == null ? name == null : person.name.equals(name);
     }
 
+    //    31 * i = (2^5 – 1) * i = i * 2^5 – i = (i << 5) – i
     @Override
     public int hashCode() {
         int hasCode = Integer.hashCode(age);
