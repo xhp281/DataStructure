@@ -20,9 +20,9 @@ public class Person {
     @Override
     public boolean equals(Object obj) {
         if (this == obj) return true;
-
-        if (obj == null || !(obj instanceof Person)) return false;
-//        if (obj == null || obj.getClass() != getClass()) return false;
+//        推荐使用第二种，第一种使用Person的子类也会相等
+//        if (obj == null || !(obj instanceof Person)) return false;
+        if (obj == null || obj.getClass() != getClass()) return false;
 
         Person person = (Person) obj;
         return person.age == age
