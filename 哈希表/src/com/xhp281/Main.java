@@ -38,8 +38,14 @@ public class Main {
         Map<Object,Object> map = new HashMap<>();
         map.put(p1,"001");
         map.put(p2,"002");
-        map.put("test","003");
+        map.put("jack","1");
+        map.put("rose","1");
+        map.put("jack","3");
+
+        map.remove(p2);
         System.out.println(map.size());
+        System.out.println(map.get(p2));
+        System.out.println(map.containsValue("001"));
 
     }
 
