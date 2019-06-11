@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7695a91f-73c2-4dee-8200-810e2840fab2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/com/xhp281/model/SubKey1.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/com/xhp281/model/SubKey2.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/xhp281/common/Times.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/xhp281/file/FileInfo.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/com/xhp281/file/Files.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/com/xhp281/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/xhp281/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/com/xhp281/map/HashMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/com/xhp281/map/HashMap.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../映射/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../映射/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../集合/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../集合/.idea/workspace.xml" afterDir="false" />
     </list>
@@ -25,11 +25,29 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/com/xhp281/Main.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="295">
-              <caret line="168" lean-forward="true" selection-start-line="168" selection-end-line="168" />
+            <state relative-caret-position="548">
+              <caret line="38" column="17" lean-forward="true" selection-start-line="38" selection-start-column="17" selection-end-line="38" selection-end-column="17" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/xhp281/common/Times.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="399">
+              <caret line="22" column="46" selection-start-line="22" selection-start-column="46" selection-end-line="22" selection-end-column="46" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/com/xhp281/file/Files.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="133">
+              <caret line="11" column="13" lean-forward="true" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
             </state>
           </provider>
         </entry>
@@ -104,8 +122,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/com/xhp281/map/HashMap.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="154" column="32" selection-start-line="154" selection-start-column="32" selection-end-line="154" selection-end-column="32" />
+            <state relative-caret-position="4883">
+              <caret line="309" lean-forward="true" selection-start-line="309" selection-end-line="309" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#471#472#0" expanded="true" />
@@ -134,28 +152,6 @@
                 <element signature="e#16626#16627#0" expanded="true" />
                 <element signature="e#15736#15737#0" expanded="true" />
                 <element signature="e#15786#15787#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_211.jdk/Contents/Home/src.zip!/java/lang/Object.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="254">
-              <caret line="99" column="22" selection-start-line="99" selection-start-column="22" selection-end-line="99" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_211.jdk/Contents/Home/src.zip!/java/lang/Integer.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="574">
-              <caret line="958" column="22" selection-start-line="958" selection-start-column="22" selection-end-line="958" selection-end-column="22" />
-              <folding>
-                <element signature="e#35824#35825#0" expanded="true" />
-                <element signature="e#35852#35853#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -198,14 +194,16 @@
         <option value="$PROJECT_DIR$/src/com/xhp281/common/Asserts.java" />
         <option value="$PROJECT_DIR$/src/com/xhp281/model/Person.java" />
         <option value="$PROJECT_DIR$/src/com/xhp281/model/SubKey2.java" />
-        <option value="$PROJECT_DIR$/src/com/xhp281/Main.java" />
         <option value="$PROJECT_DIR$/src/com/xhp281/map/HashMap.java" />
+        <option value="$PROJECT_DIR$/src/com/xhp281/file/Files.java" />
+        <option value="$PROJECT_DIR$/src/com/xhp281/common/Times.java" />
+        <option value="$PROJECT_DIR$/src/com/xhp281/Main.java" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="2540" />
-    <option name="y" value="-100" />
+    <option name="x" value="2415" />
+    <option name="y" value="-227" />
     <option name="width" value="1303" />
     <option name="height" value="1310" />
   </component>
@@ -249,6 +247,22 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="com" type="462c0819:PsiDirectoryNode" />
               <item name="xhp281" type="462c0819:PsiDirectoryNode" />
+              <item name="common" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="哈希表" type="b2602c69:ProjectViewProjectNode" />
+              <item name="哈希表" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="xhp281" type="462c0819:PsiDirectoryNode" />
+              <item name="file" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="哈希表" type="b2602c69:ProjectViewProjectNode" />
+              <item name="哈希表" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="com" type="462c0819:PsiDirectoryNode" />
+              <item name="xhp281" type="462c0819:PsiDirectoryNode" />
               <item name="map" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -269,14 +283,14 @@
   <component name="PropertiesComponent">
     <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/com/xhp281/model" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/com/xhp281/common" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/com/xhp281/model" />
       <recent name="$PROJECT_DIR$/src/com/xhp281/common" />
       <recent name="$PROJECT_DIR$/src/com/xhp281" />
+      <recent name="$PROJECT_DIR$/src/com/xhp281/model" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -381,11 +395,18 @@
       <option name="project" value="LOCAL" />
       <updated>1560253750722</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="测试用例">
+      <created>1560254351521</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1560254351521</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="2540" y="-100" width="1303" height="1310" extended-state="0" />
+    <frame x="2441" y="-226" width="1303" height="1310" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" sideWeight="0.6168224" visible="true" weight="0.19746234" />
@@ -423,7 +444,8 @@
     <MESSAGE value="map添加，查找的时候判断修改" />
     <MESSAGE value="添加递归优化" />
     <MESSAGE value="添加，查找的判断优化" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加，查找的判断优化" />
+    <MESSAGE value="测试用例" />
+    <option name="LAST_COMMIT_MESSAGE" value="测试用例" />
   </component>
   <component name="editorHistoryManager">
     <entry file="jar:///Library/Java/JavaVirtualMachines/jdk1.8.0_211.jdk/Contents/Home/src.zip!/java/lang/Double.java">
@@ -483,13 +505,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/com/xhp281/common/Asserts.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="95">
-          <caret line="5" column="30" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/xhp281/model/Person.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="513">
@@ -540,8 +555,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/com/xhp281/map/HashMap.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="154" column="32" selection-start-line="154" selection-start-column="32" selection-end-line="154" selection-end-column="32" />
+        <state relative-caret-position="4883">
+          <caret line="309" lean-forward="true" selection-start-line="309" selection-end-line="309" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#471#472#0" expanded="true" />
@@ -574,10 +589,31 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/xhp281/file/Files.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="133">
+          <caret line="11" column="13" lean-forward="true" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/xhp281/common/Times.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="22" column="46" selection-start-line="22" selection-start-column="46" selection-end-line="22" selection-end-column="46" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/com/xhp281/common/Asserts.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="95">
+          <caret line="5" column="30" selection-start-line="5" selection-start-column="30" selection-end-line="5" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/com/xhp281/Main.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="168" lean-forward="true" selection-start-line="168" selection-end-line="168" />
+        <state relative-caret-position="548">
+          <caret line="38" column="17" lean-forward="true" selection-start-line="38" selection-start-column="17" selection-end-line="38" selection-end-column="17" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

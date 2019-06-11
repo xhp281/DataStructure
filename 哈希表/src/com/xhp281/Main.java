@@ -1,6 +1,10 @@
 package com.xhp281;
 
 import com.xhp281.common.Asserts;
+import com.xhp281.common.Times;
+import com.xhp281.file.FileInfo;
+import com.xhp281.file.Files;
+import com.xhp281.map.TreeMap;
 import com.xhp281.model.Key;
 import com.xhp281.model.Person;
 import com.xhp281.map.HashMap;
@@ -16,6 +20,41 @@ import com.xhp281.model.SubKey2;
 
 public class Main {
 
+    static void test1Map(Map<String, Integer> map, String[] words) {
+        Times.test(map.getClass().getName(), new Times.Task() {
+            @Override
+            public void execute() {
+                for (String word : words) {
+                    Integer count = map.get(word);
+                    count = count == null ? 0 : count;
+                    map.put(word, count + 1);
+                }
+                System.out.println(map.size()); // 17188
+
+                int count = 0;
+                for (String word : words) {
+                    Integer i = map.get(word);
+                    count += i == null ? 0 : i;
+                    map.remove(word);
+                }
+                Asserts.test(count == words.length);
+                Asserts.test(map.size() == 0);
+            }
+        });
+    }
+
+    static void test1() {
+        String filepath = "/Users/FenDou/Code/Java";
+        FileInfo fileInfo = Files.read(filepath, null);
+        String[] words = fileInfo.words();
+
+        System.out.println("总行数：" + fileInfo.getLines());
+        System.out.println("单词总数：" + words.length);
+        System.out.println("-------------------------------------");
+
+        test1Map(new TreeMap<>(), words);
+        test1Map(new HashMap<>(), words);
+    }
 //    static void test1(){
 //        String string = "jack";
 //        System.out.println(string.hashCode());
@@ -177,10 +216,11 @@ public class Main {
         Asserts.test(map.size() == 20);
     }
     public static void main(String[]args){
-        test2(new HashMap<>());
-		test3(new HashMap<>());
-		test4(new HashMap<>());
-		test5(new HashMap<>());
+        test1();
+//        test2(new HashMap<>());
+//		test3(new HashMap<>());
+//		test4(new HashMap<>());
+//		test5(new HashMap<>());
     }
 
 }
