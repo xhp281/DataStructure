@@ -1,7 +1,9 @@
 package com.xhp281;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.xhp281.model.Key;
+import com.xhp281.model.Person;
+import com.xhp281.map.HashMap;
+import com.xhp281.map.Map;
 
 /**
  * User: FenDou
@@ -22,7 +24,6 @@ public class Main {
         Long c = 156l;
         Double d = 10.9;
         String e = "rose";
-
         System.out.println(a.hashCode());
         System.out.println(b.hashCode());
         System.out.println(c.hashCode());
@@ -46,11 +47,28 @@ public class Main {
         System.out.println(map.size());
         System.out.println(map.get(p2));
         System.out.println(map.containsValue("001"));
-
     }
 
+    /* 极端测试 */
+    static void test4(){
+        HashMap<Object,Integer> map = new HashMap<>();
+        for (int i = 0; i < 9; i++) {
+            map.put(new Key(i),i);
+        }
+//        map.traversal(new Map.Visitor<Object, Integer>() {
+//            @Override
+//            public boolean visit(Object key, Integer value) {
+//                System.out.println(key + "_" + value);
+//                return false;
+//            }
+//        });
+        map.print();
+//        System.out.println(map.size());
+        System.out.println(map.get(new Key(1)));
+
+    }
     public static void main(String[]args){
-        test3();
+        test4();
     }
 
 }

@@ -1,4 +1,4 @@
-package com.xhp281;
+package com.xhp281.model;
 
 /**
  * User: FenDou

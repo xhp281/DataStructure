@@ -1,5 +1,8 @@
 package com.xhp281.map;
 
+import com.xhp281.printer.BinaryTreeInfo;
+import com.xhp281.printer.BinaryTrees;
+
 import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.Objects;
@@ -116,6 +119,7 @@ public class HashMap<K,V> implements Map<K,V> {
     @Override
     public boolean containsValue(V value) {
         if (size == 0) return false;
+
         Queue<Node<K,V>> queue = new LinkedList<>();
         for (int i = 0; i < table.length; i++) {
             if (table[i] == null) continue;
@@ -138,7 +142,25 @@ public class HashMap<K,V> implements Map<K,V> {
 
     @Override
     public void traversal(Visitor<K, V> visitor) {
+        if (size == 0 || visitor == null) return;
 
+        Queue<Node<K,V>> queue = new LinkedList<>();
+        for (int i = 0; i < table.length; i++) {
+            if (table[i] == null) continue;
+
+            queue.offer(table[i]); // 入队
+            while (!queue.isEmpty()){
+                Node<K,V> node = queue.poll();
+                if (visitor.visit(node.key,node.value)) return;;
+
+                if (node.left != null){
+                    queue.offer(node.left);
+                }
+                if (node.right != null){
+                    queue.offer(node.right);
+                }
+            }
+        }
     }
 
     /* 根据key找到节点 */
@@ -165,7 +187,7 @@ public class HashMap<K,V> implements Map<K,V> {
         return hash & (table.length - 1);
     }
     private int index(Node<K,V>node){
-        return node.hash & (table.length - 1);
+        return (node.hash ^ (node.hash >>> 16)) & (table.length - 1);
     }
 
     /**
@@ -206,9 +228,40 @@ public class HashMap<K,V> implements Map<K,V> {
         return System.identityHashCode(k1) - System.identityHashCode(k2);
     }
 
-    //    私有方法
+    //   私有方法
     private boolean valEquals(V v1,V v2){
         return v1 == null ? v2 == null : v1.equals(v2);
+    }
+
+    /* 打印红黑树 */
+    public void print(){
+        if (size == 0) return;
+        for (int i = 0; i < table.length; i++) {
+            final  Node<K,V> root = table[i];
+            System.out.println("【index=" + i + "】");
+            BinaryTrees.println(new BinaryTreeInfo() {
+                @Override
+                public Object root() {
+                    return root;
+                }
+
+                @Override
+                public Object left(Object node) {
+                    return ((Node<K,V>)node).right;
+                }
+
+                @Override
+                public Object right(Object node) {
+                    return ((Node<K,V>)node).left;
+                }
+
+                @Override
+                public Object string(Object node) {
+                    return node;
+                }
+            });
+            System.out.println("--------------------------------------------------------");
+        }
     }
 
     /* 删除 */
@@ -535,6 +588,10 @@ public class HashMap<K,V> implements Map<K,V> {
             }
 
             return null;
+        }
+        @Override
+        public String toString() {
+            return "Node_" + key + "_" + value;
         }
     }
 }
