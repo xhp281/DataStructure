@@ -1,5 +1,6 @@
 package com.xhp281;
 
+import com.xhp281.common.Asserts;
 import com.xhp281.model.Key;
 import com.xhp281.model.Person;
 import com.xhp281.map.HashMap;
@@ -67,8 +68,20 @@ public class Main {
         System.out.println(map.get(new Key(1)));
 
     }
+
+    /* 比较的bug修复测试 */
+    static void test5(){
+        HashMap<Object,Integer> map = new HashMap<>();
+        for (int i = 0; i < 9; i++) {
+            map.put(new Key(i),i);
+        }
+        map.put(new Key(4),100);
+        Asserts.test(map.size() == 9);
+        Asserts.test(map.get(new Key(4)) == 100);
+        Asserts.test(map.get(new Key(8)) == 8);
+    }
     public static void main(String[]args){
-        test4();
+        test5();
     }
 
 }

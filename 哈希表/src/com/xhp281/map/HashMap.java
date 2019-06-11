@@ -70,10 +70,40 @@ public class HashMap<K,V> implements Map<K,V> {
         Node<K,V> parent = root;
         Node<K,V> node = root;
         int cmp = 0;
-        int h1 = key == null ? 0 : key.hashCode();
+        K k1 = key;
+        int h1 = k1 == null ? 0 : k1.hashCode();
+        Node<K,V> result = null;
         do {
-            cmp = compare(key, node.key, h1, node.hashCode());
+//            cmp = compare(key, node.key, h1, node.hashCode());
             parent = node;
+            K   k2 = node.key;
+            int h2 = node.hash;
+
+            if (h1 > h2){
+                cmp = 1;
+            }else if (h1 < h2){
+                cmp = -1;
+            }else if(Objects.equals(k1,k2)){
+//                已经存在相同的值,直接覆盖
+                cmp = 0;
+            }else if (k1 != null && k2 != null
+                     && k1.getClass() == k2.getClass()
+                     && k1 instanceof Comparable){
+                // k1 k2 不为空，且类型相同，哈希值相等，可以进行比较
+                   cmp = ((Comparable) k1).compareTo(k2);
+            }else{
+                // 哈希值相等，不具备可比较性
+                if (node.left != null && (result = node(node.left,k1)) != null
+                    || node.right != null && (result = node(node.right,k1)) != null){
+                    // 已经存在key,直接覆盖
+                    cmp = 0;
+                    node = result;
+                }else{
+                    // 不存在key
+                    cmp = System.identityHashCode(k1) - System.identityHashCode(k2);
+                }
+            }
+
             if (cmp > 0) {
                 node = node.right;
             } else if (cmp < 0) {
@@ -165,15 +195,48 @@ public class HashMap<K,V> implements Map<K,V> {
 
     /* 根据key找到节点 */
     private Node<K,V> node(K key){
-        Node<K,V> node = table[index(key)];
-        int h1 = key == null ? 0 : key.hashCode();
+        Node<K,V> root = table[index(key)];
+        return root == null ? null : node(root,key);
+    }
+
+    /* 根据 root 和 key 查找 node */
+    private Node<K,V> node(Node<K,V> node,K k1){
+        int h1 = k1 == null ? 0 : k1.hashCode();
+        // 存储查找结果
+        Node<K,V> result = null;
+
         while (node != null){
-            int cmp = compare(key,node.key,h1,node.hash);
-            if (cmp == 0) return node;
-            if (cmp > 0){
+            K k2   = node.key;
+            int h2 = node.hash;
+
+            // 先比较哈希值
+            if (h1 > h2){
                 node = node.right;
-            }else{
+            }else if (h1 < h2){
                 node = node.left;
+            }else if (Objects.equals(k1, k2)) { // 哈希值相等的时候判断内容
+                return node;
+            }else if (k1 != null && k2 != null
+                    && k1.getClass() == k2.getClass()
+                    && k1 instanceof Comparable){
+
+                // k1 k2 不为空，且类型相同，哈希值相等，可以进行比较
+                int cmp = ((Comparable) k1).compareTo(k2);
+                if (cmp > 0){
+                    node = node.right;
+                }else if (cmp < 0){
+                    node = node.left;
+                }else{
+                    return node;
+                }
+
+            // 哈希值相等，不具备可比较性
+            }else if (node.right != null && (result = node(node.right,k1)) != null){
+                return result;
+            }else if (node.left != null && (result = node(node.left,k1)) != null){
+                return result;
+            }else{
+                return null;
             }
         }
         return null;
