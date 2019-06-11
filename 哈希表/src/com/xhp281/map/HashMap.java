@@ -89,10 +89,11 @@ public class HashMap<K,V> implements Map<K,V> {
                 cmp = 0;
             }else if (k1 != null && k2 != null
                      && k1.getClass() == k2.getClass()
-                     && k1 instanceof Comparable){
+                     && k1 instanceof Comparable
+                     && ((cmp = ((Comparable) k1).compareTo(k2) )!= 0)){
                 // k1 k2 不为空，且类型相同，哈希值相等，可以进行比较
-                   cmp = ((Comparable) k1).compareTo(k2);
-
+                // compareTo 相等不认为是相等
+//              cmp = ((Comparable) k1).compareTo(k2);
             }else if (searched){
                 // search == true，使用地址值比较过了，直接用地址比较
                     cmp = System.identityHashCode(k1) - System.identityHashCode(k2);
@@ -216,7 +217,7 @@ public class HashMap<K,V> implements Map<K,V> {
         while (node != null){
             K k2   = node.key;
             int h2 = node.hash;
-
+            int cmp = 0;
             // 先比较哈希值
             if (h1 > h2){
                 node = node.right;
@@ -226,25 +227,16 @@ public class HashMap<K,V> implements Map<K,V> {
                 return node;
             }else if (k1 != null && k2 != null
                     && k1.getClass() == k2.getClass()
-                    && k1 instanceof Comparable){
+                    && k1 instanceof Comparable
+                    && ((cmp = ((Comparable) k1).compareTo(k2)) != 0)){
+                // k1 k2 不为空，且类型相同，哈希值相等，可以进行比较, compareTo相等的时候不算等于（有可能不同对象hash值相等）
+                node = cmp > 0 ? node.right : node.left;
 
-                // k1 k2 不为空，且类型相同，哈希值相等，可以进行比较
-                int cmp = ((Comparable) k1).compareTo(k2);
-                if (cmp > 0){
-                    node = node.right;
-                }else if (cmp < 0){
-                    node = node.left;
-                }else{
-                    return node;
-                }
-
-            // 哈希值相等，不具备可比较性
+                // 哈希值相等，不具备可比较性
             }else if (node.right != null && (result = node(node.right,k1)) != null){
                 return result;
-            }else if (node.left != null && (result = node(node.left,k1)) != null){
-                return result;
             }else{
-                return null;
+                node = node.left;
             }
         }
         return null;

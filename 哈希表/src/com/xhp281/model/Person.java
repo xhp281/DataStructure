@@ -6,7 +6,7 @@ package com.xhp281.model;
  * Description:
  */
 
-public class Person {
+public class Person implements Comparable<Person> {
     private String name;
     private int age;
     private float height;
@@ -37,5 +37,11 @@ public class Person {
         hasCode = hasCode * 31 + Float.hashCode(height);
         hasCode = hasCode * 31 + (name == null ? 0 :name.hashCode());
         return hasCode;
+    }
+
+    // 年龄大的大
+    @Override
+    public int compareTo(Person o) {
+        return age - o.age;
     }
 }

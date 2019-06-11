@@ -80,8 +80,20 @@ public class Main {
         Asserts.test(map.get(new Key(4)) == 100);
         Asserts.test(map.get(new Key(8)) == 8);
     }
+
+    /* compareTo 相等的情况 */
+    static void test6(){
+        Person p1 = new Person("jakc",1.67f,10);
+        Person p2 = new Person("robin",1.67f,10);
+        HashMap<Object,Integer> map = new HashMap<>();
+        map.put(p1,233);
+        map.put(p2,111);
+
+        System.out.println(map.size());
+
+    }
     public static void main(String[]args){
-        test5();
+        test6();
     }
 
 }
