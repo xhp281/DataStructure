@@ -5,6 +5,8 @@ import com.xhp281.model.Key;
 import com.xhp281.model.Person;
 import com.xhp281.map.HashMap;
 import com.xhp281.map.Map;
+import com.xhp281.model.SubKey1;
+import com.xhp281.model.SubKey2;
 
 /**
  * User: FenDou
@@ -14,86 +16,171 @@ import com.xhp281.map.Map;
 
 public class Main {
 
-    static void test1(){
-        String string = "jack";
-        System.out.println(string.hashCode());
-    }
-
-    static void test2(){
-        Integer a = 100;
-        Float b = 10.6f;
-        Long c = 156l;
-        Double d = 10.9;
-        String e = "rose";
-        System.out.println(a.hashCode());
-        System.out.println(b.hashCode());
-        System.out.println(c.hashCode());
-        System.out.println(d.hashCode());
-        System.out.println(e.hashCode());
-
-    }
-
-    static void test3(){
-        Person p1 = new Person("jakc",1.67f,10);
-        Person p2 = new Person("jakc",1.67f,10);
-
-        Map<Object,Object> map = new HashMap<>();
-        map.put(p1,"001");
-        map.put(p2,"002");
-        map.put("jack","1");
-        map.put("rose","1");
-        map.put("jack","3");
-
-        map.remove(p2);
-        System.out.println(map.size());
-        System.out.println(map.get(p2));
-        System.out.println(map.containsValue("001"));
-    }
-
-    /* 极端测试 */
-    static void test4(){
-        HashMap<Object,Integer> map = new HashMap<>();
-        for (int i = 0; i < 9; i++) {
-            map.put(new Key(i),i);
-        }
-//        map.traversal(new Map.Visitor<Object, Integer>() {
-//            @Override
-//            public boolean visit(Object key, Integer value) {
-//                System.out.println(key + "_" + value);
-//                return false;
-//            }
-//        });
-        map.print();
+//    static void test1(){
+//        String string = "jack";
+//        System.out.println(string.hashCode());
+//    }
+//
+//    static void test2(){
+//        Integer a = 100;
+//        Float b = 10.6f;
+//        Long c = 156l;
+//        Double d = 10.9;
+//        String e = "rose";
+//        System.out.println(a.hashCode());
+//        System.out.println(b.hashCode());
+//        System.out.println(c.hashCode());
+//        System.out.println(d.hashCode());
+//        System.out.println(e.hashCode());
+//
+//    }
+//
+//    static void test3(){
+//        Person p1 = new Person("jakc",1.67f,10);
+//        Person p2 = new Person("jakc",1.67f,10);
+//
+//        Map<Object,Object> map = new HashMap<>();
+//        map.put(p1,"001");
+//        map.put(p2,"002");
+//        map.put("jack","1");
+//        map.put("rose","1");
+//        map.put("jack","3");
+//
+//        map.remove(p2);
 //        System.out.println(map.size());
-        System.out.println(map.get(new Key(1)));
+//        System.out.println(map.get(p2));
+//        System.out.println(map.containsValue("001"));
+//    }
+//
+//    /* 极端测试 */
+//    static void test4(){
+//        HashMap<Object,Integer> map = new HashMap<>();
+//        for (int i = 0; i < 9; i++) {
+//            map.put(new Key(i),i);
+//        }
+////        map.traversal(new Map.Visitor<Object, Integer>() {
+////            @Override
+////            public boolean visit(Object key, Integer value) {
+////                System.out.println(key + "_" + value);
+////                return false;
+////            }
+////        });
+//        map.print();
+////        System.out.println(map.size());
+//        System.out.println(map.get(new Key(1)));
+//
+//    }
+//
+//    /* 比较的bug修复测试 */
+//    static void test5(){
+//        HashMap<Object,Integer> map = new HashMap<>();
+//        for (int i = 0; i < 9; i++) {
+//            map.put(new Key(i),i);
+//        }
+//        map.put(new Key(4),100);
+//        Asserts.test(map.size() == 9);
+//        Asserts.test(map.get(new Key(4)) == 100);
+//        Asserts.test(map.get(new Key(8)) == 8);
+//    }
+//
+//    /* compareTo 相等的情况 */
+//    static void test6(){
+//        Person p1 = new Person("jakc",1.67f,10);
+//        Person p2 = new Person("robin",1.67f,10);
+//        HashMap<Object,Integer> map = new HashMap<>();
+//        map.put(p1,233);
+//        map.put(p2,111);
+//
+//        System.out.println(map.size());
+//    }
+//
+//
+//    static void test7(HashMap<Object, Integer> map) {
+//        for (int i = 1; i <= 20; i++) {
+//            map.put(new SubKey1(i), i);
+//        }
+//        map.put(new SubKey2(1), 5);
+//        Asserts.test(map.get(new SubKey1(1)) == 5);
+//        Asserts.test(map.get(new SubKey2(1)) == 5);
+//        Asserts.test(map.size() == 20);
+//    }
 
-    }
-
-    /* 比较的bug修复测试 */
-    static void test5(){
-        HashMap<Object,Integer> map = new HashMap<>();
-        for (int i = 0; i < 9; i++) {
-            map.put(new Key(i),i);
+    static void test2(HashMap<Object, Integer> map) {
+        for (int i = 1; i <= 20; i++) {
+            map.put(new Key(i), i);
         }
-        map.put(new Key(4),100);
-        Asserts.test(map.size() == 9);
-        Asserts.test(map.get(new Key(4)) == 100);
+        for (int i = 5; i <= 7; i++) {
+            map.put(new Key(i), i + 5);
+        }
+        Asserts.test(map.size() == 20);
+        Asserts.test(map.get(new Key(4)) == 4);
+        Asserts.test(map.get(new Key(5)) == 10);
+        Asserts.test(map.get(new Key(6)) == 11);
+        Asserts.test(map.get(new Key(7)) == 12);
         Asserts.test(map.get(new Key(8)) == 8);
     }
 
-    /* compareTo 相等的情况 */
-    static void test6(){
-        Person p1 = new Person("jakc",1.67f,10);
-        Person p2 = new Person("robin",1.67f,10);
-        HashMap<Object,Integer> map = new HashMap<>();
-        map.put(p1,233);
-        map.put(p2,111);
+    static void test3(HashMap<Object, Integer> map) {
+        map.put(null, 1); // 1
+        map.put(new Object(), 2); // 2
+        map.put("jack", 3); // 3
+        map.put(10, 4); // 4
+        map.put(new Object(), 5); // 5
+        map.put("jack", 6);
+        map.put(10, 7);
+        map.put(null, 8);
+        map.put(10, null);
+        Asserts.test(map.size() == 5);
+        Asserts.test(map.get(null) == 8);
+        Asserts.test(map.get("jack") == 6);
+        Asserts.test(map.get(10) == null);
+        Asserts.test(map.get(new Object()) == null);
+        Asserts.test(map.containsKey(10));
+        Asserts.test(map.containsKey(null));
+        Asserts.test(map.containsValue(null));
+        Asserts.test(map.containsValue(1) == false);
+    }
 
-        System.out.println(map.size());
+    static void test4(HashMap<Object, Integer> map) {
+        map.put("jack", 1);
+        map.put("rose", 2);
+        map.put("jim", 3);
+        map.put("jake", 4);
+        for (int i = 1; i <= 10; i++) {
+            map.put("test" + i, i);
+            map.put(new Key(i), i);
+        }
+        for (int i = 5; i <= 7; i++) {
+            Asserts.test(map.remove(new Key(i)) == i);
+        }
+        for (int i = 1; i <= 3; i++) {
+            map.put(new Key(i), i + 5);
+        }
+        Asserts.test(map.size() == 21);
+        Asserts.test(map.get(new Key(1)) == 6);
+        Asserts.test(map.get(new Key(2)) == 7);
+        Asserts.test(map.get(new Key(3)) == 8);
+        Asserts.test(map.get(new Key(4)) == 4);
+        Asserts.test(map.get(new Key(5)) == null);
+        Asserts.test(map.get(new Key(6)) == null);
+        Asserts.test(map.get(new Key(7)) == null);
+        Asserts.test(map.get(new Key(8)) == 8);
+    }
 
+    static void test5(HashMap<Object, Integer> map) {
+        for (int i = 1; i <= 20; i++) {
+            map.put(new SubKey1(i), i);
+        }
+        map.put(new SubKey2(1), 5);
+        Asserts.test(map.get(new SubKey1(1)) == 5);
+        Asserts.test(map.get(new SubKey2(1)) == 5);
+        Asserts.test(map.size() == 20);
     }
     public static void main(String[]args){
-        test6();
+        test2(new HashMap<>());
+		test3(new HashMap<>());
+		test4(new HashMap<>());
+		test5(new HashMap<>());
     }
 
 }

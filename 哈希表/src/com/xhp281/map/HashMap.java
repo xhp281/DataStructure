@@ -152,7 +152,7 @@ public class HashMap<K,V> implements Map<K,V> {
 
     @Override
     public boolean containsKey(K key) {
-        return false;
+        return node(key) != null;
     }
 
     @Override
