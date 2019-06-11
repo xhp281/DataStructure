@@ -73,6 +73,7 @@ public class HashMap<K,V> implements Map<K,V> {
         K k1 = key;
         int h1 = k1 == null ? 0 : k1.hashCode();
         Node<K,V> result = null;
+        boolean searched = false;
         do {
 //            cmp = compare(key, node.key, h1, node.hashCode());
             parent = node;
@@ -91,18 +92,25 @@ public class HashMap<K,V> implements Map<K,V> {
                      && k1 instanceof Comparable){
                 // k1 k2 不为空，且类型相同，哈希值相等，可以进行比较
                    cmp = ((Comparable) k1).compareTo(k2);
-            }else{
+
+            }else if (searched){
+                // search == true，使用地址值比较过了，直接用地址比较
+                    cmp = System.identityHashCode(k1) - System.identityHashCode(k2);
+
+                }else{// 没有使用过地址值比较
+
                 // 哈希值相等，不具备可比较性
                 if (node.left != null && (result = node(node.left,k1)) != null
-                    || node.right != null && (result = node(node.right,k1)) != null){
+                        || node.right != null && (result = node(node.right,k1)) != null){
                     // 已经存在key,直接覆盖
                     cmp = 0;
                     node = result;
                 }else{
                     // 不存在key
                     cmp = System.identityHashCode(k1) - System.identityHashCode(k2);
+                    searched = true;
                 }
-            }
+                }
 
             if (cmp > 0) {
                 node = node.right;
@@ -253,43 +261,43 @@ public class HashMap<K,V> implements Map<K,V> {
         return (node.hash ^ (node.hash >>> 16)) & (table.length - 1);
     }
 
-    /**
-     * @return
-     * 返回值等于0，代表e1和e2相等；
-     * 返回值大于0，代表k1大于k2；
-     * 返回值小于于0，代表k1小于k2
-     */
-    private int compare(K k1, K k2, int h1, int h2) {
-
-        // 比较哈希值
-        int result = h1 - h2;
-        if (result != 0) return result;
-
-        // 哈希值相等，value相等
-        if (Objects.equals(k1,k2)) return 0;
-
-        // 哈希值相等，value不equals
-        // 比较类名
-        if (k1 != null && k2 != null){
-            String k1Clas = k1.getClass().getName();
-            String k2Clas = k2.getClass().getName();
-            // 类进行比较
-            result = k1Clas.compareTo(k2Clas);
-            // 不相等直接返回比较结果
-            if (result != 0) return result;
-            // 是同一种类型 并且具备可比较性
-            if (k1 instanceof Comparable){
-                return ((Comparable) k1).compareTo(k2);
-            }
-        }
-
-        // 是同一种类型，哈希值一样，但是不具备可比较性
-        // k1 != null k2 == null
-        // k1 == null k2 != null
-
-        // 比较内存地址的hashCode
-        return System.identityHashCode(k1) - System.identityHashCode(k2);
-    }
+//    /**
+//     * @return
+//     * 返回值等于0，代表e1和e2相等；
+//     * 返回值大于0，代表k1大于k2；
+//     * 返回值小于于0，代表k1小于k2
+//     */
+//    private int compare(K k1, K k2, int h1, int h2) {
+//
+//        // 比较哈希值
+//        int result = h1 - h2;
+//        if (result != 0) return result;
+//
+//        // 哈希值相等，value相等
+//        if (Objects.equals(k1,k2)) return 0;
+//
+//        // 哈希值相等，value不equals
+//        // 比较类名
+//        if (k1 != null && k2 != null){
+//            String k1Clas = k1.getClass().getName();
+//            String k2Clas = k2.getClass().getName();
+//            // 类进行比较
+//            result = k1Clas.compareTo(k2Clas);
+//            // 不相等直接返回比较结果
+//            if (result != 0) return result;
+//            // 是同一种类型 并且具备可比较性
+//            if (k1 instanceof Comparable){
+//                return ((Comparable) k1).compareTo(k2);
+//            }
+//        }
+//
+//        // 是同一种类型，哈希值一样，但是不具备可比较性
+//        // k1 != null k2 == null
+//        // k1 == null k2 != null
+//
+//        // 比较内存地址的hashCode
+//        return System.identityHashCode(k1) - System.identityHashCode(k2);
+//    }
 
     //   私有方法
     private boolean valEquals(V v1,V v2){
