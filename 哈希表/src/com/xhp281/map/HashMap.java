@@ -71,7 +71,7 @@ public class HashMap<K,V> implements Map<K,V> {
         Node<K,V> node = root;
         int cmp = 0;
         K k1 = key;
-        int h1 = k1 == null ? 0 : k1.hashCode();
+        int h1 = hash(k1);
         Node<K,V> result = null;
         boolean searched = false;
         do {
@@ -210,7 +210,7 @@ public class HashMap<K,V> implements Map<K,V> {
 
     /* 根据 root 和 key 查找 node */
     private Node<K,V> node(Node<K,V> node,K k1){
-        int h1 = k1 == null ? 0 : k1.hashCode();
+        int h1 = hash(k1);
         // 存储查找结果
         Node<K,V> result = null;
 
@@ -244,13 +244,17 @@ public class HashMap<K,V> implements Map<K,V> {
 
     /* 根据key生成对应的下标值 */
     private int index(K key){
+        return hash(key) & (table.length - 1);
+    }
+
+    // 获取hash之后的值
+    private int hash(K key){
         if (key == null) return 0;
         int hash = key.hashCode();
-        hash = hash ^ (hash >>> 16);
-        return hash & (table.length - 1);
+        return hash ^ (hash >>> 16);
     }
     private int index(Node<K,V>node){
-        return (node.hash ^ (node.hash >>> 16)) & (table.length - 1);
+        return node.hash  & (table.length - 1);
     }
 
 //    /**
@@ -340,6 +344,7 @@ public class HashMap<K,V> implements Map<K,V> {
             // 用后继节点的值覆盖度为2的节点的值
             node.key    = s.key;
             node.value  = s.value;
+            node.hash   = s.hash;
             // 删除后继节点
             node = s;
         }
@@ -621,7 +626,8 @@ public class HashMap<K,V> implements Map<K,V> {
         public Node(K key, V value, Node<K,V> parent) {
             this.key    = key;
             this.value  = value;
-            this.hash   = key == null ? 0 : key.hashCode();
+            int hash    = key == null ? 0 : key.hashCode();
+            this.hash   = hash ^ (hash >>> 16);
             this.parent = parent;
         }
 

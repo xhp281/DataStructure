@@ -217,10 +217,10 @@ public class Main {
     }
     public static void main(String[]args){
         test1();
-//        test2(new HashMap<>());
-//		test3(new HashMap<>());
-//		test4(new HashMap<>());
-//		test5(new HashMap<>());
+        test2(new HashMap<>());
+		test3(new HashMap<>());
+		test4(new HashMap<>());
+		test5(new HashMap<>());
     }
 
 }
